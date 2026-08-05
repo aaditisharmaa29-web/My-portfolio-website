@@ -108,3 +108,46 @@ body {
     z-index:20;
 
 }
+.pegboard{
+
+    position:absolute;
+
+    top:65px;
+
+    right:0;
+
+    width:51.5%;
+
+    height:auto;
+
+    z-index:2;
+
+    pointer-events:none;
+
+}
+
+.mac-container{
+
+    position:absolute;
+
+    bottom:60px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:44vw;
+
+    max-width:720px;
+
+    z-index:10;
+
+}
+
+.mac{
+
+    width:100%;
+
+    display:block;
+
+}
