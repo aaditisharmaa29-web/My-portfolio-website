@@ -1,50 +1,52 @@
 ---
 import "../styles/global.css";
+
+import Navbar from "../components/Navbar.astro";
+import Mac from "../components/Mac.astro";
+import Pegboard from "../components/Pegboard.astro";
+import Coffee from "../components/Coffee.astro";
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Aditi's Portfolio</title>
-    <link rel="stylesheet" href="/src/styles/global.css" />
-  </head>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
 
-  <body>
+		<title>Aditi Sharma</title>
+	</head>
 
-    <main class="homepage">
-    <nav class="desktop-nav">
+	<body>
 
-    <a href="#">PROJECTS</a>
+		<main class="homepage">
 
-    <a href="#">RESUME</a>
+			<section class="scene">
 
-    <a href="#">FUN</a>
+				<!-- Navigation -->
 
-    <a href="#">NOTES</a>
+				<Navbar />
 
-</nav> 
+				<!-- Pegboard -->
 
-<div class="pegboard-container">
+				<Pegboard />
 
-    <img
-        src="/images/metal-board.png"
-        class="pegboard"
-        alt="Pegboard"
-    />
+				<!-- Coffee -->
 
-    </div>
+				<Coffee />
 
-  <div class="mac-container">
+				<!-- Mac -->
 
-    <img
-        src="/images/mac-home.png"
-        alt="iMac"
-        class="mac"
-    />
+				<Mac />
 
-</div>
-    </main>
+			</section>
 
-  </body>
+		</main>
+
+		<script type="module" src="/src/scripts/desktop.js"></script>
+
+	</body>
 
 </html>

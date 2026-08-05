@@ -1,0 +1,56 @@
+---
+const {
+    id = "",
+    title = "Window"
+} = Astro.props;
+---
+
+<div
+    id={id}
+    class="window"
+>
+
+    <!-- Title Bar -->
+
+    <div class="window-header">
+
+        <div class="traffic-lights">
+
+            <button
+                class="window-close"
+                aria-label="Close"
+            ></button>
+
+            <button
+                class="window-minimise"
+                aria-label="Minimise"
+            ></button>
+
+            <button
+                class="window-maximise"
+                aria-label="Maximise"
+            ></button>
+
+        </div>
+
+        <h3 class="window-title">
+
+            {title}
+
+        </h3>
+
+    </div>
+
+    <!-- Content -->
+
+    <div class="window-content">
+
+        <slot />
+
+    </div>
+
+    <!-- Resize Handle -->
+
+    <div class="resize-handle"></div>
+
+</div>
