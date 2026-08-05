@@ -1,0 +1,94 @@
+---
+interface Props {
+  showSticky?: boolean;
+}
+const { showSticky = true } = Astro.props;
+---
+
+<div class="imac" id="imac">
+  <div class="imac__bezel">
+    <div class="imac__screen" id="imac-screen">
+      <div class="screen-layer" id="screen-content" data-locked="true">
+        <slot />
+      </div>
+
+      <div class="lock" id="lock" data-hidden="false">
+        <div class="lock__avatar">🌴</div>
+        <p class="lock__name">Lily's iMac</p>
+        <form class="lock__form" id="lock-form" autocomplete="off">
+          <input
+            class="lock__input"
+            id="lock-input"
+            type="password"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="4"
+            placeholder="••••"
+            aria-label="Enter password"
+          />
+          <button class="lock__submit" type="submit" aria-label="Unlock">→</button>
+        </form>
+        <p class="lock__hint">psst — check the sticky note</p>
+      </div>
+    </div>
+    <div class="imac__chin"></div>
+  </div>
+  <div class="imac__neck"></div>
+  <div class="imac__base"></div>
+
+  {
+    showSticky && (
+      <div class="imac__sticky">
+        <img src="/images/password-stickynote.png" alt="A sticky note with the password 6666 written on it" />
+      </div>
+    )
+  }
+</div>
+
+<script>
+  const PASSWORD = '6666';
+  const STORAGE_KEY = 'mac-unlocked';
+
+  function initMac() {
+    const lock = document.getElementById('lock');
+    const content = document.getElementById('screen-content');
+    const form = document.getElementById('lock-form') as HTMLFormElement | null;
+    const input = document.getElementById('lock-input') as HTMLInputElement | null;
+
+    if (!lock || !content || !form || !input) return;
+
+    const unlock = () => {
+      lock.setAttribute('data-hidden', 'true');
+      content.setAttribute('data-locked', 'false');
+      try {
+        sessionStorage.setItem(STORAGE_KEY, '1');
+      } catch (e) {
+        /* storage unavailable — unlock still works for this view */
+      }
+    };
+
+    try {
+      if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+        unlock();
+      }
+    } catch (e) {
+      /* ignore */
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (input.value.trim() === PASSWORD) {
+        unlock();
+      } else {
+        lock.classList.remove('is-shake');
+        void lock.offsetWidth;
+        lock.classList.add('is-shake');
+        input.value = '';
+        input.focus();
+      }
+    });
+  }
+
+  initMac();
+  document.addEventListener('astro:page-load', initMac);
+</script>

@@ -1,0 +1,13 @@
+---
+// The pegboard sits fixed on the right edge of the viewport.
+// It's empty for now — postcards, photos, and other pinned bits
+// get added here later as absolutely-positioned children of
+// .pegboard__items (positioned in % so they stay put at any size).
+---
+
+<aside class="pegboard" aria-hidden="true">
+  <img src="/images/metal-board.png" alt="" />
+  <div class="pegboard__items">
+    <slot />
+  </div>
+</aside>

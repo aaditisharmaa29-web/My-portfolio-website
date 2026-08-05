@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Pegboard from '../components/Pegboard.astro';
+
+interface Props {
+  title?: string;
+  active?: string;
+}
+
+const { title = 'Lily — Portfolio', active = '' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="scene">
+      <Navbar active={active} />
+      <div class="scene__stage">
+        <slot />
+      </div>
+      <p class="floor-tag">made with love (and a 4-digit password)</p>
+    </div>
+    <Pegboard />
+  </body>
+</html>
