@@ -1,20 +1,22 @@
 ---
 import "../styles/global.css";
-
 import Navbar from "../components/Navbar.astro";
-import Mac from "../components/Mac.astro";
+import Desktop from "../components/Desktop.astro";
 ---
 
 <main class="homepage">
+    <Navbar />
 
-    <section class="scene">
-
-        <Navbar />
-
-        <Mac />
-
-    </section>
-
+    <div class="mac-frame">
+        <div class="mac-bezel">
+            <Desktop />
+        </div>
+        <div class="mac-chin">
+            <div class="mac-camera"></div>
+        </div>
+        <div class="mac-stand-neck"></div>
+        <div class="mac-stand-base"></div>
+    </div>
 </main>
 
 <script type="module" src="/src/scripts/desktop.js"></script>
