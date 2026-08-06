@@ -1,6 +1,43 @@
+---
+import Resume from "../windows/Resume.astro";
+import Projects from "../windows/Projects.astro";
+import Fun from "../windows/Fun.astro";
+import Contact from "../windows/Contact.astro";
+---
+
 <div id="desktop" class="desktop">
 
-    <!-- Window Container -->
+    <!-- Hidden App Templates -->
+
+    <div id="app-templates" style="display:none;">
+
+        <div id="resume-template">
+
+            <Resume />
+
+        </div>
+
+        <div id="projects-template">
+
+            <Projects />
+
+        </div>
+
+        <div id="fun-template">
+
+            <Fun />
+
+        </div>
+
+        <div id="contact-template">
+
+            <Contact />
+
+        </div>
+
+    </div>
+
+    <!-- Active Windows -->
 
     <div
         id="window-layer"
@@ -33,9 +70,7 @@
 
             </div>
 
-            <div class="window-content">
-
-            </div>
+            <div class="window-content"></div>
 
             <div class="resize-handle"></div>
 

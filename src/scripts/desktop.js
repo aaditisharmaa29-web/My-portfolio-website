@@ -39,7 +39,7 @@ const APPS = {
    INITIALISE
 =========================================================== */
 
-init();
+// init();
 
 function init() {
   navbarButtons.forEach((button) => {
@@ -58,23 +58,59 @@ function init() {
 =========================================================== */
 
 function openWindow(app) {
+  // Check if already open
+
+  const existing = windowExists(app);
+
+  if (existing) {
+    focusWindow(existing);
+
+    return;
+  }
+
+  // Clone the window
+
   const template = document.getElementById("window-template");
 
-  const clone = template.content.firstElementChild.cloneNode(true);
+  const window = template.content.firstElementChild.cloneNode(true);
 
-  clone.style.zIndex = ++highestZ;
+  // Store which app this window belongs to
 
-  clone.style.left = 60 + openWindows.length * 20 + "px";
+  window.dataset.app = app;
 
-  clone.style.top = 40 + openWindows.length * 20 + "px";
+  // Position the window
 
-  clone.querySelector(".window-title").textContent = APPS[app].title;
+  window.style.left = 60 + openWindows.length * 24 + "px";
 
-  addEvents(clone);
+  window.style.top = 40 + openWindows.length * 24 + "px";
 
-  layer.appendChild(clone);
+  window.style.zIndex = ++highestZ;
 
-  openWindows.push(clone);
+  // Window title
+
+  window.querySelector(".window-title").textContent = APPS[app].title;
+
+  // Load the Astro content
+
+  const source = document.getElementById(`${app}-template`);
+
+  const content = source.cloneNode(true);
+
+  content.removeAttribute("id");
+
+  const body = window.querySelector(".window-content");
+
+  body.appendChild(content);
+
+  // Events
+
+  addEvents(window);
+
+  // Add to Desktop
+
+  layer.appendChild(window);
+
+  openWindows.push(window);
 }
 /* ===========================================================
    FOCUS
@@ -82,6 +118,14 @@ function openWindow(app) {
 
 function focusWindow(window) {
   window.style.zIndex = ++highestZ;
+}
+
+function getWindowBody(window) {
+  return window.querySelector(".window-content");
+}
+
+function windowExists(app) {
+  return openWindows.find((window) => window.dataset.app === app);
 }
 /* ===========================================================
    DRAGGING
@@ -95,35 +139,6 @@ let offsetX = 0;
 
 let offsetY = 0;
 
-function addEvents(window) {
-  window.addEventListener("mousedown", () => {
-    focusWindow(window);
-  });
-
-  const header = window.querySelector(".window-header");
-
-  header.addEventListener("mousedown", (event) => {
-    startDragging(event, window);
-  });
-
-  const closeButton = window.querySelector(".window-close");
-
-  closeButton.addEventListener("click", () => {
-    closeWindow(window);
-  });
-
-  const minimiseButton = window.querySelector(".window-minimise");
-
-  minimiseButton.addEventListener("click", () => {
-    minimiseWindow(window);
-  });
-
-  const maximiseButton = window.querySelector(".window-maximise");
-
-  maximiseButton.addEventListener("click", () => {
-    maximiseWindow(window);
-  });
-}
 /* ===========================================================
    START DRAG
 =========================================================== */
@@ -195,6 +210,8 @@ document.addEventListener("mouseup", () => {
 =========================================================== */
 
 function closeWindow(window) {
+  openWindows = openWindows.filter((w) => w !== window);
+
   window.remove();
 }
 

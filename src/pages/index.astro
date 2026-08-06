@@ -3,50 +3,18 @@ import "../styles/global.css";
 
 import Navbar from "../components/Navbar.astro";
 import Mac from "../components/Mac.astro";
-import Pegboard from "../components/Pegboard.astro";
-import Coffee from "../components/Coffee.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
+<main class="homepage">
 
-		<title>Aditi Sharma</title>
-	</head>
+    <section class="scene">
 
-	<body>
+        <Navbar />
 
-		<main class="homepage">
+        <Mac />
 
-			<section class="scene">
+    </section>
 
-				<!-- Navigation -->
+</main>
 
-				<Navbar />
-
-				<!-- Pegboard -->
-
-				<Pegboard />
-
-				<!-- Coffee -->
-
-				<Coffee />
-
-				<!-- Mac -->
-
-				<Mac />
-
-			</section>
-
-		</main>
-
-		<script type="module" src="/src/scripts/desktop.js"></script>
-
-	</body>
-
-</html>
+<script type="module" src="/src/scripts/desktop.js"></script>
