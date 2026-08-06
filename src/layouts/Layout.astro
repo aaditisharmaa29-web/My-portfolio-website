@@ -14,7 +14,7 @@ const { title = "Aditi's Portfolio" } = Astro.props;
 <body>
     <main class="homepage">
 
-     <Navbar />
+        <Navbar />
 
         <button id="back-button" class="back-button" aria-label="Back">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -24,18 +24,35 @@ const { title = "Aditi's Portfolio" } = Astro.props;
 
         <div class="mac-frame">
             <div class="mac-bezel">
-                <slot />
+                <div class="mac-screen-ring">
+                    <slot />
+                </div>
             </div>
-
-
             <div class="mac-chin">
-                <div class="mac-camera"></div>
+                <div class="mac-logo" aria-hidden="true"></div>
+                <div class="mac-disk-slot" aria-hidden="true"></div>
             </div>
             <div class="mac-stand-neck"></div>
             <div class="mac-stand-base"></div>
         </div>
     </main>
 
-    <script type="module" src="/src/scripts/desktop.js"></script>
+    <!-- WINDOW TEMPLATE (Cloned by desktop.js when buttons are clicked) -->
+    <template id="window-template">
+        <div class="window">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <button class="window-close" title="Close">×</button>
+                    <button class="window-minimise" title="Minimize">–</button>
+                    <button class="window-maximise" title="Full Screen">□</button>
+                </div>
+                <span class="window-title">Window</span>
+            </div>
+            <div class="window-content"></div>
+            <div class="resize-handle"></div>
+        </div>
+    </template>
+
+    <script src="../scripts/desktop.js"></script>
 </body>
 </html>

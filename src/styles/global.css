@@ -1,8 +1,5 @@
-/* ============================================================
-   GOOGLE FONTS
-============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Reenie+Beanie&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Reenie+Beanie&family=Silkscreen&display=swap");
 
 /* ============================================================
    RESET
@@ -18,17 +15,15 @@
 
 html,
 body{
-
     width:100%;
     height:100%;
 
     overflow-y:auto;
     overflow-x:hidden;
-
 }
 
 body{
-    font-family:"Instrument Sans",sans-serif;
+    font-family:"Geneva", "Chicago", "Instrument Sans", sans-serif;
     background:#e3d6df;
     color:#3f3f3f;
 }
@@ -69,7 +64,7 @@ a{
 
     padding-top:12px;
 
-    gap:36px;      /* Increase or decrease this */
+    gap:36px;
 }
 
 /* ============================================================
@@ -94,7 +89,6 @@ a{
 ============================================================ */
 
 .desktop-nav{
-
     display:flex;
     align-items:center;
     justify-content:center;
@@ -105,17 +99,13 @@ a{
     margin-top:0;
     margin-bottom:-8px;
 
-   
-
     border:2px solid #3d383c;
     border-radius:999px;
 
     background:transparent;
 }
 
-
 .desktop-nav button{
-
     font-family:"Instrument Sans",sans-serif;
     font-size:1rem;
     font-weight:500;
@@ -129,11 +119,8 @@ a{
 }
 
 .desktop-nav button:hover{
-
     opacity:.65;
-
 }
-
 
 /* ============================================================
    MAC
@@ -146,9 +133,8 @@ a{
     transform:translateX(-50%);
 }
 
-
 .mac-frame{
-    width: 1200px;
+    width: 1280px;
     max-width:90vw;
 
     display:flex;
@@ -164,70 +150,117 @@ a{
     transform:scale(1.15);
 }
 
+/* Beige outer case - top corners rounded much more than bottom,
+   like the original compact Mac silhouette */
 .mac-bezel{
     width:100%;
-    background:#1d1d1f;
-    border-radius:14px 14px 0 0;
-    padding:18px 18px 0;
+    background:linear-gradient(180deg, #f2ede0 0%, #e6e0cd 100%);
+    border-radius:64px 64px 20px 20px;
+    padding:34px 34px 22px;
     box-shadow:
-        0 18px 40px rgba(0,0,0,.16),
-        0 6px 12px rgba(0,0,0,.08);
+        0 18px 40px rgba(0,0,0,.18),
+        0 6px 12px rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.5);
 }
 
-.mac-screen{
-    position:relative;
-    width:100%;
-    height:760px;
-    max-height:72vh;
-    background:#fdfcf9;
-    border-radius:4px;
-    overflow:hidden;
+/* Black inner ring that frames the screen */
+.mac-screen-ring{
+    background:#141414;
+    border-radius:30px 30px 12px 12px;
+    padding:18px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
+/* ============================================================
+   MAC SCREEN & DESKTOP BACKGROUND
+============================================================ */
+
+.mac-screen {
+    position: relative;
+    width: 100%;
+    height: 760px;
+    max-height: 72vh;
+    border-radius: 4px;
+    overflow: hidden;
+
+    /* Krusty Krab Wallpaper Background */
+    background-image: url("/images/slot-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.desktop {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent; /* Allows wallpaper beneath to show through */
+    overflow: hidden;
+}
+
+/* Lower panel of the case: logo badge + floppy disk slot */
 .mac-chin{
     width:100%;
-    height:70px;
+    height:120px;
 
-    background:#e8e8ea;
+    background:linear-gradient(180deg, #e6e0cd 0%, #d9d3bd 100%);
 
-    border-radius:0 0 16px 16px;
+    border-radius:0 0 34px 34px;
 
     display:flex;
-    justify-content:center;
+    justify-content:space-between;
     align-items:center;
+
+    padding:0 44px;
 }
 
-.mac-camera{
-    width:13px;
-    height:13px;
+/* Simple neutral badge mark - swap in your own logo/monogram if you like */
+.mac-logo{
+    width:26px;
+    height:26px;
 
     border-radius:50%;
 
-    background:#2b2b2d;
+    background:linear-gradient(180deg, #ffffff, #cfc9b4);
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);
 }
 
-.mac-stand{
+.mac-disk-slot{
+    position:relative;
 
-    width:100%;
+    width:220px;
+    height:14px;
 
-    display:flex;
+    background:#232323;
+    border-radius:3px;
 
-    flex-direction:column;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.6);
+}
 
-    align-items:center;
+.mac-disk-slot::after{
+    content:"";
+    position:absolute;
+    top:-4px;
+    right:6px;
+
+    width:36px;
+    height:22px;
+
+    background:linear-gradient(180deg, #3a3a3a, #262626);
+    border-radius:3px;
 }
 
 .mac-stand-neck{
-    width:90px;
+    width:100px;
     height:70px;
-    background:linear-gradient(#dcdcde, #c7c7c9);
+    background:linear-gradient(#e6e0cd, #cfc9b2);
 }
 
 .mac-stand-base{
-    width:300px;
-    height:16px;
+    width:320px;
+    height:18px;
 
-    background:#cfcfd1;
+    background:linear-gradient(180deg, #d9d3bd, #c8c2a9);
 
     border-radius:6px;
 
@@ -257,7 +290,7 @@ a{
 }
 
 /* ============================================================
-   WINDOW
+   CLASSIC VINTAGE MAC WINDOW
 ============================================================ */
 
 .window{
@@ -272,15 +305,13 @@ a{
     display:flex;
     flex-direction:column;
 
-    background:#fdfcf9;
+    background:#ffffff;
 
-    border-radius:14px;
+    border-radius:0; /* Sharp retro corners */
+    border:2px solid #000000; /* Crisp dark border */
 
-    border:1px solid rgba(0,0,0,.08);
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.16),
-        0 6px 12px rgba(0,0,0,.08);
+    /* Vintage pixelated drop shadow */
+    box-shadow:4px 4px 0px rgba(0, 0, 0, 0.4);
 
     overflow:hidden;
 
@@ -288,23 +319,31 @@ a{
 }
 
 /* ============================================================
-   WINDOW HEADER
+   CLASSIC PINSTRIPE HEADER
 ============================================================ */
 
 .window-header{
     position:relative;
 
-    height:30px;
+    height:24px;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    background:#ece8e3;
+    /* Vintage Mac Horizontal Pinstripes */
+    background: repeating-linear-gradient(
+        to bottom,
+        #000000 0px,
+        #000000 1px,
+        #ffffff 1px,
+        #ffffff 2px
+    );
 
-    border-bottom:1px solid rgba(0,0,0,.08);
+    border-bottom:2px solid #000000;
 
     cursor:grab;
+    padding:0 6px;
 }
 
 .window-header:active{
@@ -312,58 +351,79 @@ a{
 }
 
 /* ============================================================
-   WINDOW TITLE
+   CLASSIC WINDOW TITLE
 ============================================================ */
 
 .window-title{
-    font-size:.8rem;
-    font-weight:500;
-    color:#444;
+    font-family:"Geneva", "Chicago", "Courier New", sans-serif;
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+
+    color:#000000;
+    background:#ffffff; /* Covers pinstripes behind title text */
+    padding:0 8px;
+
+    z-index:2;
 }
 
 /* ============================================================
-   TRAFFIC LIGHTS
+   RETRO CONTROL BUTTONS (SYSTEM 7 CLOSE BOX)
 ============================================================ */
 
 .traffic-lights{
     position:absolute;
-    left:14px;
+    left:6px;
+    top:50%;
+    transform:translateY(-50%);
 
     display:flex;
-    gap:8px;
-}
-
-.window-close,
-.window-minimise,
-.window-maximise{
-    width:12px;
-    height:12px;
-
-    border-radius:50%;
-
-    transition:.2s;
+    align-items:center;
+    gap:4px;
+    z-index:3;
 }
 
 .window-close{
-    background:#ff5f57;
+    width:13px;
+    height:13px;
+
+    border-radius:0;
+    border:1px solid #000000;
+    background:#ffffff;
+    position:relative;
+
+    transition:none;
 }
 
-.window-minimise{
-    background:#febc2e;
+/* Classic inner box inside close button */
+.window-close::after{
+    content:"";
+    position:absolute;
+    top:2px;
+    left:2px;
+    right:2px;
+    bottom:2px;
+    border:1px solid #000000;
 }
 
+.window-close:hover{
+    transform:none;
+    background:#000000;
+}
+
+.window-close:hover::after{
+    border-color:#ffffff;
+}
+
+/* Hide modern Mac yellow/green traffic buttons */
+.window-minimise,
 .window-maximise{
-    background:#28c840;
-}
-
-.window-close:hover,
-.window-minimise:hover,
-.window-maximise:hover{
-    transform:scale(1.08);
+    display:none;
 }
 
 /* ============================================================
-   WINDOW CONTENT
+   WINDOW CONTENT & RETRO SCROLLBARS
 ============================================================ */
 
 .window-content{
@@ -371,9 +431,34 @@ a{
 
     overflow:auto;
 
-    padding:32px;
+    padding:20px;
 
-    background:#fbfaf8;
+    background:#ffffff;
+    color:#000000;
+    font-family:"Geneva", "Chicago", sans-serif;
+}
+
+/* Classic System 7 Webkit Scrollbars */
+.window-content::-webkit-scrollbar {
+    width:16px;
+    height:16px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: repeating-linear-gradient(
+        45deg,
+        #e0e0e0,
+        #e0e0e0 1px,
+        #ffffff 1px,
+        #ffffff 2px
+    );
+    border-left:1px solid #000000;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background:#ffffff;
+    border:1px solid #000000;
+    box-shadow: inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff;
 }
 
 /* ============================================================
@@ -389,6 +474,14 @@ a{
     height:16px;
 
     cursor:nwse-resize;
+
+    border-top:1px solid #000000;
+    border-left:1px solid #000000;
+    background:#ffffff;
+    background-image:
+        linear-gradient(135deg, #000000 25%, transparent 25%),
+        linear-gradient(225deg, #000000 25%, transparent 25%);
+    background-size:4px 4px;
 }
 
 /* ============================================================
@@ -416,7 +509,6 @@ a{
 ============================================================ */
 
 @media (max-width:1200px){
-
     .mac-frame{
         width:80vw;
     }
@@ -424,11 +516,9 @@ a{
     .mac-screen{
         height:50vw;
     }
-
 }
 
 @media (max-width:768px){
-
     .desktop-nav{
         gap:10px;
         padding:10px 18px;
@@ -442,7 +532,6 @@ a{
         width:88%;
         height:75%;
     }
-
 }
 
 .back-button{
@@ -477,4 +566,77 @@ a{
 
 .back-button:hover{
     opacity:.65;
+}
+
+/* ============================================================
+   RETRO CONTROL BUTTONS (System 7 Style)
+============================================================ */
+
+.traffic-lights {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 3;
+}
+
+/* Base style for all 3 header buttons */
+.window-close,
+.window-minimise,
+.window-maximise {
+  display: flex !important; /* Unhide minimize and maximize */
+  align-items: center;
+  justify-content: center;
+
+  width: 14px;
+  height: 14px;
+
+  font-family: "Geneva", "Chicago", sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+
+  border: 1px solid #000000;
+  background: #ffffff;
+  color: #000000;
+
+  border-radius: 0; /* Retro square edges */
+  cursor: pointer;
+  transition: none;
+}
+
+/* Hover effects for buttons */
+.window-close:hover,
+.window-minimise:hover,
+.window-maximise:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* ============================================================
+   RESIZE HANDLE
+============================================================ */
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: 16px;
+  height: 16px;
+
+  cursor: nwse-resize;
+
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  background: #ffffff;
+  background-image:
+    linear-gradient(135deg, #000000 25%, transparent 25%),
+    linear-gradient(225deg, #000000 25%, transparent 25%);
+  background-size: 4px 4px;
+  z-index: 10;
 }

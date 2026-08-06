@@ -134,9 +134,21 @@ function addEvents(win) {
     startResize(event, win);
   });
 
-  win.querySelector(".window-close").addEventListener("click", () => closeWindow(win));
-  win.querySelector(".window-minimise").addEventListener("click", () => minimiseWindow(win));
-  win.querySelector(".window-maximise").addEventListener("click", () => maximiseWindow(win));
+  // Action Buttons
+  win.querySelector(".window-close").addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeWindow(win);
+  });
+
+  win.querySelector(".window-minimise").addEventListener("click", (e) => {
+    e.stopPropagation();
+    minimiseWindow(win);
+  });
+
+  win.querySelector(".window-maximise").addEventListener("click", (e) => {
+    e.stopPropagation();
+    maximiseWindow(win);
+  });
 }
 
 function startResize(event, win) {
