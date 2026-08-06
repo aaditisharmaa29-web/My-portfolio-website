@@ -444,3 +444,35 @@ a{
     }
 
 }
+
+.back-button{
+    position:fixed;
+    top:24px;
+    left:24px;
+
+    width:44px;
+    height:44px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+    background:#2b2b2d;
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:opacity .3s ease, background .2s ease;
+
+    z-index:2000;
+}
+
+.back-button.visible{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.back-button:hover{
+    background:#3a3a3c;
+}

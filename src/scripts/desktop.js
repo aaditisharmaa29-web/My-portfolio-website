@@ -2,6 +2,7 @@ const macFrame = document.querySelector(".mac-frame");
 const desktop = document.getElementById("desktop");
 const layer = document.getElementById("window-layer");
 const navbarButtons = document.querySelectorAll("[data-app]");
+const backButton = document.getElementById("back-button");
 
 let highestZ = 1;
 let openWindows = [];
@@ -22,8 +23,9 @@ function init() {
 }
 
 function openWindow(app) {
-  // Trigger zoom animation on frame open
+  // Trigger zoom animation & show back button
   macFrame.classList.add("zoomed");
+  backButton.classList.add("visible");
 
   const existing = windowExists(app);
   if (existing) {
@@ -49,6 +51,16 @@ function openWindow(app) {
   layer.appendChild(win);
   openWindows.push(win);
 }
+
+function zoomOut() {
+  macFrame.classList.remove("zoomed");
+  backButton.classList.remove("visible");
+
+  openWindows.forEach((win) => win.remove());
+  openWindows = [];
+}
+
+backButton.addEventListener("click", zoomOut);
 
 function focusWindow(win) {
   win.style.zIndex = ++highestZ;
