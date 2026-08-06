@@ -457,13 +457,15 @@ a{
     align-items:center;
     justify-content:center;
 
+    border:2px solid #3d383c;
     border-radius:50%;
-    background:#2b2b2d;
+    background:#e3d6df;
+    color:#3c373b;
 
     opacity:0;
     pointer-events:none;
 
-    transition:opacity .3s ease, background .2s ease;
+    transition:opacity .3s ease, background .2s ease, opacity .2s ease;
 
     z-index:2000;
 }
@@ -474,5 +476,5 @@ a{
 }
 
 .back-button:hover{
-    background:#3a3a3c;
+    opacity:.65;
 }
