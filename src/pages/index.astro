@@ -1,38 +1,8 @@
 ---
-import "../styles/global.css";
-import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
 import Desktop from "../components/Desktop.astro";
 ---
 
-<main class="homepage">
-
-    <Navbar />
-
-    <div class="mac-wrapper">
-
-        <div class="mac-frame">
-
-            <div class="mac-bezel">
-
-                <div class="mac-screen">
-                    <Desktop />
-                </div>
-
-            </div>
-
-            <div class="mac-chin">
-                <div class="mac-camera"></div>
-            </div>
-
-            <div class="mac-stand">
-                <div class="mac-stand-neck"></div>
-                <div class="mac-stand-base"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</main>
-
-<script type="module" src="/src/scripts/desktop.js"></script>
+<Layout title="JaipurOS">
+    <Desktop />
+</Layout>

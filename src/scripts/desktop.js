@@ -1,3 +1,4 @@
+const macFrame = document.querySelector(".mac-frame");
 const desktop = document.getElementById("desktop");
 const layer = document.getElementById("window-layer");
 const navbarButtons = document.querySelectorAll("[data-app]");
@@ -21,6 +22,9 @@ function init() {
 }
 
 function openWindow(app) {
+  // Trigger zoom animation on frame open
+  macFrame.classList.add("zoomed");
+
   const existing = windowExists(app);
   if (existing) {
     focusWindow(existing);

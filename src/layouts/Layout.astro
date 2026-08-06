@@ -1,0 +1,32 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+
+const { title = "JaipurOS" } = Astro.props;
+---
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+</head>
+<body>
+    <main class="homepage">
+        <Navbar />
+
+        <div class="mac-frame">
+            <div class="mac-bezel">
+                <slot />
+            </div>
+            <div class="mac-chin">
+                <div class="mac-camera"></div>
+            </div>
+            <div class="mac-stand-neck"></div>
+            <div class="mac-stand-base"></div>
+        </div>
+    </main>
+
+    <script type="module" src="/src/scripts/desktop.js"></script>
+</body>
+</html>
