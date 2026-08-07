@@ -26,6 +26,7 @@ const { title = "Aditi's Portfolio" } = Astro.props;
             <div class="mac-bezel">
                 <div class="mac-screen-ring">
                     <slot />
+                    <div id="dock" class="dock"></div>
                 </div>
             </div>
             <div class="mac-chin">
@@ -54,5 +55,6 @@ const { title = "Aditi's Portfolio" } = Astro.props;
     </template>
 
     <script src="../scripts/desktop.js"></script>
+    <script src="../scripts/window-controls.js"></script>
 </body>
 </html>

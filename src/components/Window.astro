@@ -1,39 +1,67 @@
 ---
-const { id = "", title = "Window", variant = "" } = Astro.props;
+const {
+    id = "",
+    title = "Window",
+    variant = ""
+} = Astro.props;
 
 const windowClass = variant === "static" ? "window window--static" : "window";
 ---
 
-<div id={id} class={windowClass}>
-  <!-- Title Bar -->
+<div
+    id={id}
+    class={windowClass}
+>
 
-  <div class="window-header">
-    <div class="traffic-lights">
-      {
-        variant === "static" ? (
-          <a href="/" class="window-close" aria-label="Back to desktop" />
-        ) : (
-          <button class="window-close" aria-label="Close" />
-        )
-      }
+    <!-- Title Bar -->
 
-      <button class="window-minimise" aria-label="Minimise"></button>
+    <div class="window-header">
 
-      <button class="window-maximise" aria-label="Maximise"></button>
+        <div class="traffic-lights">
+
+            {variant === "static" ? (
+                
+                    href="/"
+                    class="window-close"
+                    aria-label="Back to desktop"
+                ></a>
+            ) : (
+                <button
+                    class="window-close"
+                    aria-label="Close"
+                ></button>
+            )}
+
+            <button
+                class="window-minimise"
+                aria-label="Minimise"
+            >{variant === "static" ? "–" : ""}</button>
+
+            <button
+                class="window-maximise"
+                aria-label="Maximise"
+            >{variant === "static" ? "□" : ""}</button>
+
+        </div>
+
+        <h3 class="window-title">
+
+            {title}
+
+        </h3>
+
     </div>
 
-    <h3 class="window-title">
-      {title}
-    </h3>
-  </div>
+    <!-- Content -->
 
-  <!-- Content -->
+    <div class="window-content">
 
-  <div class="window-content">
-    <slot />
-  </div>
+        <slot />
 
-  <!-- Resize Handle -->
+    </div>
 
-  <div class="resize-handle"></div>
+    <!-- Resize Handle -->
+
+    <div class="resize-handle"></div>
+
 </div>
