@@ -1,56 +1,39 @@
 ---
-const {
-    id = "",
-    title = "Window"
-} = Astro.props;
+const { id = "", title = "Window", variant = "" } = Astro.props;
+
+const windowClass = variant === "static" ? "window window--static" : "window";
 ---
 
-<div
-    id={id}
-    class="window"
->
+<div id={id} class={windowClass}>
+  <!-- Title Bar -->
 
-    <!-- Title Bar -->
+  <div class="window-header">
+    <div class="traffic-lights">
+      {
+        variant === "static" ? (
+          <a href="/" class="window-close" aria-label="Back to desktop" />
+        ) : (
+          <button class="window-close" aria-label="Close" />
+        )
+      }
 
-    <div class="window-header">
+      <button class="window-minimise" aria-label="Minimise"></button>
 
-        <div class="traffic-lights">
-
-            <button
-                class="window-close"
-                aria-label="Close"
-            ></button>
-
-            <button
-                class="window-minimise"
-                aria-label="Minimise"
-            ></button>
-
-            <button
-                class="window-maximise"
-                aria-label="Maximise"
-            ></button>
-
-        </div>
-
-        <h3 class="window-title">
-
-            {title}
-
-        </h3>
-
+      <button class="window-maximise" aria-label="Maximise"></button>
     </div>
 
-    <!-- Content -->
+    <h3 class="window-title">
+      {title}
+    </h3>
+  </div>
 
-    <div class="window-content">
+  <!-- Content -->
 
-        <slot />
+  <div class="window-content">
+    <slot />
+  </div>
 
-    </div>
+  <!-- Resize Handle -->
 
-    <!-- Resize Handle -->
-
-    <div class="resize-handle"></div>
-
+  <div class="resize-handle"></div>
 </div>

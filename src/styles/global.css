@@ -104,7 +104,7 @@ a{
     background:transparent;
 }
 
-.desktop-nav button{
+.desktop-nav a{
     font-family:"Instrument Sans",sans-serif;
     font-size:1rem;
     font-weight:500;
@@ -113,12 +113,18 @@ a{
     text-transform:uppercase;
 
     color:#3c373b;
+    cursor:pointer;
 
     transition:.2s ease;
 }
 
-.desktop-nav button:hover{
+.desktop-nav a:hover{
     opacity:.65;
+}
+
+.desktop-nav a[aria-current="page"]{
+    text-decoration:underline;
+    text-underline-offset:4px;
 }
 
 /* ============================================================
@@ -618,6 +624,23 @@ a{
     background-size:4px 4px;
 }
 
+.window--static{
+    position:relative;
+    top:auto;
+    left:auto;
+
+    width:100%;
+    max-width:640px;
+    height:auto;
+    min-height:420px;
+
+    margin:24px auto;
+}
+
+.window--static .resize-handle{
+    display:none;
+}
+
 /* ============================================================
    WINDOW STATES
 ============================================================ */
@@ -713,7 +736,7 @@ a{
         padding:10px 18px;
     }
 
-    .desktop-nav button{
+    .desktop-nav a{
         font-size:.65rem;
     }
 

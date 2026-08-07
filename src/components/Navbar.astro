@@ -1,35 +1,23 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/resume", label: "RESUME" },
+    { href: "/fun", label: "FUN" },
+    { href: "/contact", label: "CONTACT" },
+];
+---
+
 <nav class="desktop-nav">
 
-    <button
-        data-app="projects"
-    >
-
-        PROJECTS
-
-    </button>
-
-    <button
-        data-app="resume"
-    >
-
-        RESUME
-
-    </button>
-
-    <button
-        data-app="fun"
-    >
-
-        FUN
-
-    </button>
-
-    <button
-        data-app="contact"
-    >
-
-        CONTACT
-
-    </button>
+    {links.map((link) => (
+        <a
+            href={link.href}
+            aria-current={currentPath.startsWith(link.href) ? "page" : undefined}
+        >
+            {link.label}
+        </a>
+    ))}
 
 </nav>

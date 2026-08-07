@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Window from "../components/Window.astro";
 import ProjectsWindow from "../components/ProjectsWindow.astro";
 ---
 
 <Layout title="Projects">
-  <ProjectsWindow />
+  <Window title="Projects" variant="static">
+    <ProjectsWindow />
+  </Window>
 </Layout>

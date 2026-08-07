@@ -1,48 +1,45 @@
-<section class="resume-window">
-  <header class="resume-header">
-    <h1>Aditi Sharma</h1>
+---
+import Layout from "../layouts/Layout.astro";
+import Window from "../components/Window.astro";
+---
 
-    <p>Graphic Designer • Illustrator • UI/UX Designer</p>
-  </header>
+<Layout title="Resume">
+  <Window title="Resume" variant="static">
+    <section class="resume-window">
+      <header class="resume-header">
+        <h1>Aditi Sharma</h1>
+        <p>Graphic Designer • Illustrator • UI/UX Designer</p>
+      </header>
 
-  <section class="resume-section">
-    <h2>About Me</h2>
+      <section class="resume-section">
+        <h2>About Me</h2>
+        <p>
+          Hi! I'm Aditi. I love creating playful digital experiences, editorial illustrations and
+          immersive web experiences inspired by Indian visual culture.
+        </p>
+      </section>
 
-    <p>
-      Hi! I'm Aditi. I love creating playful digital experiences, editorial illustrations and
-      immersive web experiences inspired by Indian visual culture.
-    </p>
-  </section>
+      <section class="resume-section">
+        <h2>Skills</h2>
+        <ul>
+          <li>UI / UX Design</li>
+          <li>Brand Identity</li>
+          <li>Illustration</li>
+          <li>Editorial Design</li>
+          <li>Motion Graphics</li>
+        </ul>
+      </section>
 
-  <section class="resume-section">
-    <h2>Skills</h2>
-
-    <ul>
-      <li>UI / UX Design</li>
-
-      <li>Brand Identity</li>
-
-      <li>Illustration</li>
-
-      <li>Editorial Design</li>
-
-      <li>Motion Graphics</li>
-    </ul>
-  </section>
-
-  <section class="resume-section">
-    <h2>Software</h2>
-
-    <ul>
-      <li>Figma</li>
-
-      <li>Illustrator</li>
-
-      <li>Photoshop</li>
-
-      <li>After Effects</li>
-
-      <li>InDesign</li>
-    </ul>
-  </section>
-</section>
+      <section class="resume-section">
+        <h2>Software</h2>
+        <ul>
+          <li>Figma</li>
+          <li>Illustrator</li>
+          <li>Photoshop</li>
+          <li>After Effects</li>
+          <li>InDesign</li>
+        </ul>
+      </section>
+    </section>
+  </Window>
+</Layout>
