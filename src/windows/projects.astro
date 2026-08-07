@@ -1,99 +1,105 @@
----
----
-
 <div class="projects-container">
-  <!-- Toolbar Area -->
-  <div class="projects-toolbar">
-    <button id="projects-back-btn" class="retro-back-btn" onclick="closeProjectView()" style="display: none;">
-      <span>◄</span> Back
-    </button>
-  </div>
 
-  <!-- 5 Dark Blue Folders Grid -->
-  <div id="projects-folder-grid" class="projects-grid">
-    <div class="project-folder-item" onclick="openProjectView('ammu')">
-      <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-      <span class="icon-label">Ammu the ammonite</span>
+    <div class="projects-toolbar">
+        <button class="retro-back-btn projects-back-btn" style="display:none;">
+            <span>◄</span> Back
+        </button>
     </div>
 
-    <div class="project-folder-item" onclick="openProjectView('techno-spiritual')">
-      <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-      <span class="icon-label">Techno Spiritual Products</span>
+    <div class="projects-grid">
+        <div class="project-folder-item" data-project="ammu">
+            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
+            <span class="icon-label">Ammu the ammonite</span>
+        </div>
+
+        <div class="project-folder-item" data-project="techno-spiritual">
+            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
+            <span class="icon-label">Techno Spiritual Products</span>
+        </div>
+
+        <div class="project-folder-item" data-project="typography">
+            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
+            <span class="icon-label">Typography</span>
+        </div>
+
+        <div class="project-folder-item" data-project="publication">
+            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
+            <span class="icon-label">Publication Design</span>
+        </div>
+
+        <div class="project-folder-item" data-project="branding">
+            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
+            <span class="icon-label">Branding</span>
+        </div>
     </div>
 
-    <div class="project-folder-item" onclick="openProjectView('typography')">
-      <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-      <span class="icon-label">Typography</span>
-    </div>
+    <div class="project-views">
+        <div class="project-detail-view" data-view="ammu">
+            <h3>Ammu the ammonite</h3>
+            <p>Content for Ammu the ammonite project goes here.</p>
+        </div>
 
-    <div class="project-folder-item" onclick="openProjectView('publication')">
-      <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-      <span class="icon-label">Publication Design</span>
-    </div>
+        <div class="project-detail-view" data-view="techno-spiritual">
+            <h3>Techno Spiritual Products</h3>
+            <p>Content for Techno Spiritual Products goes here.</p>
+        </div>
 
-    <div class="project-folder-item" onclick="openProjectView('branding')">
-      <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-      <span class="icon-label">Branding</span>
-    </div>
-  </div>
+        <div class="project-detail-view" data-view="typography">
+            <h3>Typography</h3>
+            <p>Content for Typography goes here.</p>
+        </div>
 
-  <!-- Content Views -->
-  <div id="project-views">
-    <div id="view-ammu" class="project-detail-view">
-      <h3>Ammu the ammonite</h3>
-      <p>Content for Ammu the ammonite project goes here.</p>
-    </div>
+        <div class="project-detail-view" data-view="publication">
+            <h3>Publication Design</h3>
+            <p>Content for Publication Design goes here.</p>
+        </div>
 
-    <div id="view-techno-spiritual" class="project-detail-view">
-      <h3>Techno Spiritual Products</h3>
-      <p>Content for Techno Spiritual Products goes here.</p>
+        <div class="project-detail-view" data-view="branding">
+            <h3>Branding</h3>
+            <p>Content for Branding goes here.</p>
+        </div>
     </div>
-
-    <div id="view-typography" class="project-detail-view">
-      <h3>Typography</h3>
-      <p>Content for Typography goes here.</p>
-    </div>
-
-    <div id="view-publication" class="project-detail-view">
-      <h3>Publication Design</h3>
-      <p>Content for Publication Design goes here.</p>
-    </div>
-
-    <div id="view-branding" class="project-detail-view">
-      <h3>Branding</h3>
-      <p>Content for Branding goes here.</p>
-    </div>
-  </div>
 </div>
 
 <script is:inline>
-  window.openProjectView = function(targetId) {
-    var grid = document.getElementById("projects-folder-grid");
-    var backBtn = document.getElementById("projects-back-btn");
-    var views = document.querySelectorAll(".project-detail-view");
+(function () {
+    if (window.__projectsDelegationInit) return;
+    window.__projectsDelegationInit = true;
 
-    if (grid) grid.style.display = "none";
+    document.addEventListener("click", function (event) {
+        const folderItem = event.target.closest(".project-folder-item");
+        const backBtn = event.target.closest(".projects-back-btn");
 
-    views.forEach(function(v) {
-      v.classList.remove("active");
+        if (folderItem) {
+            const container = folderItem.closest(".projects-container");
+            if (!container) return;
+
+            const targetId = folderItem.dataset.project;
+            const grid = container.querySelector(".projects-grid");
+            const back = container.querySelector(".projects-back-btn");
+            const views = container.querySelectorAll(".project-detail-view");
+
+            if (grid) grid.style.display = "none";
+            views.forEach((v) => v.classList.remove("active"));
+
+            const targetView = container.querySelector(`.project-detail-view[data-view="${targetId}"]`);
+            if (targetView) targetView.classList.add("active");
+
+            if (back) back.style.display = "inline-flex";
+            return;
+        }
+
+        if (backBtn) {
+            const container = backBtn.closest(".projects-container");
+            if (!container) return;
+
+            const grid = container.querySelector(".projects-grid");
+            const views = container.querySelectorAll(".project-detail-view");
+
+            views.forEach((v) => v.classList.remove("active"));
+            if (grid) grid.style.display = "grid";
+            backBtn.style.display = "none";
+        }
     });
-
-    var targetView = document.getElementById("view-" + targetId);
-    if (targetView) targetView.classList.add("active");
-
-    if (backBtn) backBtn.style.display = "inline-flex";
-  };
-
-  window.closeProjectView = function() {
-    var grid = document.getElementById("projects-folder-grid");
-    var backBtn = document.getElementById("projects-back-btn");
-    var views = document.querySelectorAll(".project-detail-view");
-
-    views.forEach(function(v) {
-      v.classList.remove("active");
-    });
-
-    if (grid) grid.style.display = "grid";
-    if (backBtn) backBtn.style.display = "none";
-  };
+})();
 </script>

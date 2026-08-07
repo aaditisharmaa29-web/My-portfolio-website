@@ -852,6 +852,7 @@ a{
 .project-detail-view {
   display: none;
   padding: 10px 0;
+  margin-top: 30px;
 }
 
 .project-detail-view.active {
