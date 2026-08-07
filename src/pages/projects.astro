@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 
 const projects = (await getCollection("projects")).sort(
     (a: { data: { order?: number } }, b: { data: { order?: number } }) =>
@@ -7,7 +7,7 @@ const projects = (await getCollection("projects")).sort(
 );
 
 const projectEntries = await Promise.all(
-    projects.map(async (project: { id: string; data: { title: string }; render: () => Promise<unknown> }) => {
+    projects.map(async (project: CollectionEntry<"projects">) => {
         const { Content } = await render(project);
         return {
             ...project,
