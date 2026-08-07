@@ -7,6 +7,19 @@ import Contact from "../windows/contact-page.astro";
 
 <div id="desktop" class="mac-screen">
 
+    <div class="menu-bar">
+        <div class="menu-bar-left">
+            <span class="menu-item">File</span>
+            <span class="menu-item">Edit</span>
+            <span class="menu-item">View</span>
+            <span class="menu-item">Label</span>
+            <span class="menu-item">Special</span>
+        </div>
+        <div class="menu-bar-right">
+            <span id="menu-clock">9:57:05 pm</span>
+        </div>
+    </div>  
+
     <div id="app-templates" style="display:none;">
         <div id="resume-template"><Resume /></div>
         <div id="projects-template"><Projects /></div>
@@ -15,6 +28,28 @@ import Contact from "../windows/contact-page.astro";
     </div>
 
     <div id="window-layer" class="window-layer"></div>
+
+    <div class="desktop-icons">
+        <button class="desktop-icon" data-app="resume">
+            <span class="folder-icon folder-blue" aria-hidden="true"></span>
+            <span class="icon-label">Resume</span>
+        </button>
+
+        <button class="desktop-icon" data-app="projects">
+            <span class="folder-icon folder-orange" aria-hidden="true"></span>
+            <span class="icon-label">Projects</span>
+        </button>
+
+        <button class="desktop-icon" data-app="fun">
+            <span class="folder-icon folder-green" aria-hidden="true"></span>
+            <span class="icon-label">Fun</span>
+        </button>
+
+        <button class="desktop-icon" data-app="contact">
+            <span class="folder-icon folder-white" aria-hidden="true"></span>
+            <span class="icon-label">Contact</span>
+        </button>
+    </div>
 
     <template id="window-template">
         <div class="window">

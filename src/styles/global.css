@@ -1,4 +1,3 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Reenie+Beanie&family=Silkscreen&display=swap");
 
 /* ============================================================
@@ -198,6 +197,55 @@ a{
     overflow: hidden;
 }
 
+/* ============================================================
+   MENU BAR (classic Mac OS top strip w/ live clock)
+============================================================ */
+
+.menu-bar{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:28px;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 10px;
+
+    background:#f4f2ea;
+    border-bottom:2px solid #1a1a1a;
+
+    font-family:"Geneva", "Chicago", "Instrument Sans", sans-serif;
+    font-size:14px;
+    color:#1a1a1a;
+
+    user-select:none;
+}
+
+.menu-bar-left,
+.menu-bar-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.menu-apple{
+    font-size:16px;
+    line-height:1;
+}
+
+.menu-item{
+    cursor:default;
+}
+
+#menu-clock{
+    font-variant-numeric:tabular-nums;
+    letter-spacing:.02em;
+}
+
 /* Lower panel of the case: logo badge + floppy disk slot */
 .mac-chin{
     width:100%;
@@ -287,6 +335,92 @@ a{
     position:absolute;
     inset:0;
     overflow:hidden;
+
+}
+
+/* ============================================================
+   DESKTOP ICONS (folder shortcuts, left-aligned)
+============================================================ */
+
+.desktop-icons {
+  position: absolute;
+  top: 45px;        /* Keeps it just below your top menu bar */
+  left: 5px;       /* Position on the left side instead of right */
+  right: auto;      /* Resets any previously set right alignment */
+  
+  display: flex;
+  flex-direction: column; /* Stacks folders vertically */
+  gap: 20px;         /* Spacing between folders */
+  z-index: 10;       /* Ensures icons stay clickable */
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.desktop-icon:hover .folder-icon{
+    filter:brightness(1.05);
+}
+
+.desktop-icon:active .folder-icon,
+.desktop-icon:focus-visible .folder-icon{
+    filter:brightness(0.92);
+}
+
+.icon-label{
+    font-family:"Geneva","Chicago","Instrument Sans", sans-serif;
+    font-size:12px;
+    color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,.6);
+    text-align:center;
+    line-height:1.2;
+}
+
+.folder-icon{
+    position:relative;
+    width:52px;
+    height:38px;
+
+    border-radius:2px 6px 6px 6px;
+    border:1px solid rgba(0,0,0,.35);
+    box-shadow:0 3px 6px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+.folder-icon::before{
+    content:"";
+    position:absolute;
+    top:-7px;
+    left:0;
+    width:24px;
+    height:9px;
+
+    background:inherit;
+    border:inherit;
+    border-bottom:none;
+
+    border-radius:3px 5px 0 0;
+}
+
+.folder-blue{
+    background:#a9d6f5;
+}
+
+.folder-orange{
+    background:#f5a94e;
+}
+
+.folder-green{
+    background:#8fd18f;
+}
+
+.folder-white{
+    background:#f7f7f2;
 }
 
 /* ============================================================
@@ -639,4 +773,87 @@ a{
     linear-gradient(225deg, #000000 25%, transparent 25%);
   background-size: 4px 4px;
   z-index: 10;
+}
+
+/* ============================================================
+   PROJECTS SUB-NAVIGATION & DARK BLUE FOLDERS
+============================================================ */
+
+/* Dark Blue Folder Variant */
+.folder-darkblue {
+  background: #56789d !important;
+}
+
+/* Projects Navigation Toolbar */
+.projects-toolbar {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  margin-bottom: -40px;
+  padding-bottom: 8px;
+}
+
+/* Retro System 7 Back Button */
+.retro-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  font-family: "Geneva", "Chicago", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #56789d;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 1px 1px 0px #000000;
+  cursor: pointer;
+  user-select: none;
+}
+
+.retro-back-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.retro-back-btn:active {
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
+/* Sub-folder Grid inside Projects Window */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.project-folder-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.project-folder-item:hover .folder-icon {
+  filter: brightness(1.15);
+}
+
+.project-folder-item .icon-label {
+  color: #000000; /* Dark text inside the white window body */
+  text-shadow: none;
+  font-size: 11px;
+}
+
+/* Project Detail View Container */
+.project-detail-view {
+  display: none;
+  padding: 10px 0;
+}
+
+.project-detail-view.active {
+  display: block;
 }

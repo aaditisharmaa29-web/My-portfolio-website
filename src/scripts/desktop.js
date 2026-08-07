@@ -19,7 +19,30 @@ function init() {
     button.addEventListener("click", () => {
       openWindow(button.dataset.app);
     });
-  });
+
+  }); 
+  startMenuClock(); 
+}
+
+function startMenuClock() {
+  const clockEl = document.getElementById("menu-clock");
+  if (!clockEl) return;
+
+  function tick() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const period = hours >= 12 ? "pm" : "am";
+
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+
+    clockEl.textContent = `${hours}:${minutes}:${seconds} ${period}`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
 }
 
 function openWindow(app) {
