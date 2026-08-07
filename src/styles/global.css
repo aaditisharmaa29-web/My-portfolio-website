@@ -626,6 +626,61 @@ a{
     display:none;
 }
 
+/* ============================================================
+   DOCK (bottom bar for minimised windows)
+============================================================ */
+
+.dock{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:28px;
+    z-index:9998;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:0 10px;
+
+    background:#f2f2ee;
+    border-top:2px solid #1a1a1a;
+
+    pointer-events:auto;
+}
+
+
+.dock-item{
+    pointer-events:auto;
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    padding:3px 12px;
+    border:1px solid rgba(0,0,0,.4);
+    border-radius:8px;
+    background:#fff;
+
+    font-family:"Geneva","Chicago","Instrument Sans", sans-serif;
+    font-size:12px;
+    color:#1a1a1a;
+    cursor:pointer;
+}
+
+.dock-item:hover{
+    background:#eee;
+}
+
+.dock-item-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#f5c542;
+    flex:none;
+}
+
 .window.maximised{
     top:0 !important;
     left:0 !important;

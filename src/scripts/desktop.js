@@ -3,6 +3,7 @@ const desktop = document.getElementById("desktop");
 const layer = document.getElementById("window-layer");
 const navbarButtons = document.querySelectorAll("[data-app]");
 const backButton = document.getElementById("back-button");
+const dock = document.getElementById("dock");
 
 let highestZ = 1;
 let openWindows = [];
@@ -50,11 +51,15 @@ function openWindow(app) {
   macFrame.classList.add("zoomed");
   backButton.classList.add("visible");
 
-  const existing = windowExists(app);
-  if (existing) {
+ const existing = windowExists(app);
+if (existing) {
+  if (existing.classList.contains("hidden")) {
+    restoreWindow(existing);
+  } else {
     focusWindow(existing);
-    return;
   }
+  return;
+}
 
   const template = document.getElementById("window-template");
   const win = template.content.firstElementChild.cloneNode(true);
@@ -128,11 +133,38 @@ document.addEventListener("mouseup", () => {
 
 function closeWindow(win) {
   openWindows = openWindows.filter((w) => w !== win);
+  removeDockItem(win);
   win.remove();
 }
 
 function minimiseWindow(win) {
-  win.style.display = "none";
+  win.classList.add("hidden");
+  addDockItem(win);
+}
+
+function restoreWindow(win) {
+  win.classList.remove("hidden");
+  removeDockItem(win);
+  focusWindow(win);
+}
+
+function addDockItem(win) {
+  const app = win.dataset.app;
+  if (dock.querySelector(`[data-dock-app="${app}"]`)) return;
+
+  const item = document.createElement("button");
+  item.className = "dock-item";
+  item.dataset.dockApp = app;
+  item.innerHTML = `<span class="dock-item-dot"></span><span>${APPS[app].title}</span>`;
+
+  item.addEventListener("click", () => restoreWindow(win));
+
+  dock.appendChild(item);
+}
+
+function removeDockItem(win) {
+  const item = dock.querySelector(`[data-dock-app="${win.dataset.app}"]`);
+  if (item) item.remove();
 }
 
 function maximiseWindow(win) {
