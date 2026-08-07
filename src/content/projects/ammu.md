@@ -1,5 +1,6 @@
 ---
 title: Ammu the ammonite
+order: 1
 ---
 
 **Type:** Placeholder — e.g. illustration series / character design

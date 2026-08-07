@@ -1,3 +1,23 @@
+---
+import { getCollection, render } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+    (a: { data: { order?: number } }, b: { data: { order?: number } }) =>
+        (a.data.order ?? 0) - (b.data.order ?? 0)
+);
+
+const projectEntries = await Promise.all(
+    projects.map(async (project: { id: string; data: { title: string }; render: () => Promise<unknown> }) => {
+        const { Content } = await render(project);
+        return {
+            ...project,
+            id: project.id.replace(/\.md$/, ""),
+            Content,
+        };
+    })
+);
+---
+
 <div class="projects-container">
 
     <div class="projects-toolbar">
@@ -7,57 +27,21 @@
     </div>
 
     <div class="projects-grid">
-        <div class="project-folder-item" data-project="ammu">
-            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-            <span class="icon-label">Ammu the ammonite</span>
-        </div>
-
-        <div class="project-folder-item" data-project="techno-spiritual">
-            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-            <span class="icon-label">Techno Spiritual Products</span>
-        </div>
-
-        <div class="project-folder-item" data-project="typography">
-            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-            <span class="icon-label">Typography</span>
-        </div>
-
-        <div class="project-folder-item" data-project="publication">
-            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-            <span class="icon-label">Publication Design</span>
-        </div>
-
-        <div class="project-folder-item" data-project="branding">
-            <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
-            <span class="icon-label">Branding</span>
-        </div>
+        {projectEntries.map((project) => (
+            <div class="project-folder-item" data-project={project.id}>
+                <span class="folder-icon folder-darkblue" aria-hidden="true"></span>
+                <span class="icon-label">{project.data.title}</span>
+            </div>
+        ))}
     </div>
 
     <div class="project-views">
-        <div class="project-detail-view" data-view="ammu">
-            <h3>Ammu the ammonite</h3>
-            <p>Content for Ammu the ammonite project goes here.</p>
-        </div>
-
-        <div class="project-detail-view" data-view="techno-spiritual">
-            <h3>Techno Spiritual Products</h3>
-            <p>Content for Techno Spiritual Products goes here.</p>
-        </div>
-
-        <div class="project-detail-view" data-view="typography">
-            <h3>Typography</h3>
-            <p>Content for Typography goes here.</p>
-        </div>
-
-        <div class="project-detail-view" data-view="publication">
-            <h3>Publication Design</h3>
-            <p>Content for Publication Design goes here.</p>
-        </div>
-
-        <div class="project-detail-view" data-view="branding">
-            <h3>Branding</h3>
-            <p>Content for Branding goes here.</p>
-        </div>
+        {projectEntries.map((project) => (
+            <div class="project-detail-view" data-view={project.id}>
+                <h3>{project.data.title}</h3>
+                <project.Content />
+            </div>
+        ))}
     </div>
 </div>
 
