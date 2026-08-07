@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProjectsWindow from "../../components/ProjectsWindow.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { project: project.id.replace(/\.md$/, "") },
+    props: { projectId: project.id.replace(/\.md$/, "") },
+  }));
+}
+
+const { project } = Astro.params;
+const { projectId } = Astro.props;
+---
+
+<!-- <Layout title={project ? `Project - ${project}` : "Projects"}> -->
+  <ProjectsWindow activeProjectId={projectId} />
+<!-- </Layout> -->

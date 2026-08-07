@@ -1,0 +1,142 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+interface Props {
+  activeProjectId?: string;
+}
+
+const { activeProjectId } = Astro.props;
+
+const projects = (await getCollection("projects")).sort(
+  (a: { data: { order?: number } }, b: { data: { order?: number } }) =>
+    (a.data.order ?? 0) - (b.data.order ?? 0),
+);
+
+const projectEntries = await Promise.all(
+  projects.map(async (project: CollectionEntry<"projects">) => {
+    const { Content } = await render(project);
+    return {
+      ...project,
+      id: project.id.replace(/\.md$/, ""),
+      Content,
+    };
+  }),
+);
+
+const isProjectOpen = Boolean(activeProjectId);
+---
+
+<div class="projects-container">
+  <div class="projects-toolbar">
+    <a
+      class="retro-back-btn projects-back-btn"
+      href="/projects"
+      data-back-url="/projects"
+      style={isProjectOpen ? "display:inline-flex" : "display:none;"}
+    >
+      <span>◄</span> Back
+    </a>
+  </div>
+
+  <div class="projects-grid" style={isProjectOpen ? "display:none;" : undefined}>
+    {
+      projectEntries.map((project) => (
+        <a class="project-folder-item" href={`/projects/${project.id}`} data-project={project.id}>
+          <span class="folder-icon folder-darkblue" aria-hidden="true" />
+          <span class="icon-label">{project.data.title}</span>
+        </a>
+      ))
+    }
+  </div>
+
+  <div class="project-views">
+    {
+      projectEntries.map((project) => (
+        <div
+          class={
+            activeProjectId === project.id ? "project-detail-view active" : "project-detail-view"
+          }
+          data-view={project.id}
+        >
+          <h3>{project.data.title}</h3>
+          <project.Content />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    if (window.__projectsDelegationInit) return;
+    window.__projectsDelegationInit = true;
+
+    const showProject = (container, targetId) => {
+      const grid = container.querySelector(".projects-grid");
+      const back = container.querySelector(".projects-back-btn");
+      const views = container.querySelectorAll(".project-detail-view");
+
+      if (grid) grid.style.display = "none";
+      views.forEach((view) => view.classList.remove("active"));
+
+      const targetView = container.querySelector(`.project-detail-view[data-view="${targetId}"]`);
+      if (targetView) targetView.classList.add("active");
+      if (back) back.style.display = "inline-flex";
+    };
+
+    const resetToGrid = (container) => {
+      const grid = container.querySelector(".projects-grid");
+      const back = container.querySelector(".projects-back-btn");
+      const views = container.querySelectorAll(".project-detail-view");
+
+      views.forEach((view) => view.classList.remove("active"));
+      if (grid) grid.style.display = "grid";
+      if (back) back.style.display = "none";
+    };
+
+    document.addEventListener("click", function (event) {
+      const folderItem = event.target.closest(".project-folder-item");
+      const backBtn = event.target.closest(".projects-back-btn");
+
+      if (folderItem) {
+        const container = folderItem.closest(".projects-container");
+        if (!container) return;
+
+        const targetId = folderItem.dataset.project;
+        if (!targetId) return;
+
+        event.preventDefault();
+        const nextUrl = new URL(
+          folderItem.getAttribute("href") || `/projects/${targetId}`,
+          window.location.href,
+        );
+        history.pushState({}, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+        showProject(container, targetId);
+        return;
+      }
+
+      if (backBtn) {
+        event.preventDefault();
+        const container = backBtn.closest(".projects-container");
+        if (!container) return;
+
+        const nextUrl = backBtn.getAttribute("data-back-url") || "/projects";
+        history.pushState({}, "", nextUrl);
+        resetToGrid(container);
+      }
+    });
+
+    window.addEventListener("popstate", function () {
+      const container = document.querySelector(".projects-container");
+      if (!container) return;
+
+      const slug = window.location.pathname.split("/").filter(Boolean).pop();
+      if (!slug || slug === "projects") {
+        resetToGrid(container);
+        return;
+      }
+
+      showProject(container, slug);
+    });
+  })();
+</script>
