@@ -19,13 +19,14 @@ const windowClass = variant === "static" ? "window window--static" : "window";
 
         <div class="traffic-lights">
 
-            {variant === "static" ? (
-                
+          {variant === "static" ? (
+                <a
                     href="/"
                     class="window-close"
                     aria-label="Back to desktop"
                 ></a>
             ) : (
+
                 <button
                     class="window-close"
                     aria-label="Close"
