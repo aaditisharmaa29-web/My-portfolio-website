@@ -73,6 +73,7 @@ if (existing) {
   const source = document.getElementById(`${app}-template`);
   const content = source.cloneNode(true);
   content.removeAttribute("id");
+  content.style.display = "";
   win.querySelector(".window-content").appendChild(content);
 
   addEvents(win);
@@ -236,3 +237,49 @@ document.addEventListener("mouseup", () => {
 });
 
 init();
+
+// ---- Projects window: folder navigation ----
+function showProject(container, targetId) {
+  const grid = container.querySelector(".projects-grid");
+  const back = container.querySelector(".projects-back-btn");
+  const views = container.querySelectorAll(".project-detail-view");
+
+  if (grid) grid.style.display = "none";
+  views.forEach((v) => v.classList.remove("active"));
+
+  const target = container.querySelector(`.project-detail-view[data-view="${targetId}"]`);
+  if (target) target.classList.add("active");
+  if (back) back.style.display = "inline-flex";
+}
+
+function resetToGrid(container) {
+  const grid = container.querySelector(".projects-grid");
+  const back = container.querySelector(".projects-back-btn");
+  const views = container.querySelectorAll(".project-detail-view");
+
+  views.forEach((v) => v.classList.remove("active"));
+  if (grid) grid.style.display = "";
+  if (back) back.style.display = "none";
+}
+
+document.addEventListener("click", function (event) {
+  const folderItem = event.target.closest(".project-folder-item");
+  const backBtn = event.target.closest(".projects-back-btn");
+
+  if (folderItem) {
+    const container = folderItem.closest(".projects-container");
+    if (!container) return;
+    const targetId = folderItem.dataset.project;
+    if (!targetId) return;
+    event.preventDefault();
+    showProject(container, targetId);
+    return;
+  }
+
+  if (backBtn) {
+    event.preventDefault();
+    const container = backBtn.closest(".projects-container");
+    if (!container) return;
+    resetToGrid(container);
+  }
+});

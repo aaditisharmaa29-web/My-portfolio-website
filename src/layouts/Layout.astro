@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
+import ProjectsWindow from "../components/ProjectsWindow.astro";
 
 const { title = "Aditi's Portfolio" } = Astro.props;
 ---
@@ -55,6 +56,71 @@ const { title = "Aditi's Portfolio" } = Astro.props;
     </template>
 
     <script src="../scripts/desktop.js"></script>
-    <script src="../scripts/window-controls.js"></script>
+    <script src="../scripts/window-control.js"></script>
+
+    <!-- APP CONTENT TEMPLATES (hidden; cloned by desktop.js into windows) -->
+    <div id="resume-template" style="display:none">
+      <section class="resume-window">
+        <header class="resume-header">
+          <h1>Aditi Sharma</h1>
+          <p>Graphic Designer &bull; Illustrator &bull; UI/UX Designer</p>
+        </header>
+        <section class="resume-section">
+          <h2>About Me</h2>
+          <p>Hi! I'm Aditi. I love creating playful digital experiences, editorial illustrations and immersive web experiences inspired by Indian visual culture.</p>
+        </section>
+        <section class="resume-section">
+          <h2>Skills</h2>
+          <ul>
+            <li>UI / UX Design</li>
+            <li>Brand Identity</li>
+            <li>Illustration</li>
+            <li>Editorial Design</li>
+            <li>Motion Graphics</li>
+          </ul>
+        </section>
+        <section class="resume-section">
+          <h2>Software</h2>
+          <ul>
+            <li>Figma</li>
+            <li>Illustrator</li>
+            <li>Photoshop</li>
+            <li>After Effects</li>
+            <li>InDesign</li>
+          </ul>
+        </section>
+      </section>
+    </div>
+
+    <div id="projects-template" style="display:none">
+      <ProjectsWindow />
+    </div>
+
+    <div id="fun-template" style="display:none">
+      <section class="fun-window">
+        <h1>Fun</h1>
+        <p>Things I enjoy outside design.</p>
+        <ul>
+          <li>Cycling</li>
+          <li>Sketching</li>
+          <li>Collecting postcards</li>
+          <li>Travelling</li>
+          <li>Coffee</li>
+        </ul>
+      </section>
+    </div>
+
+    <div id="contact-template" style="display:none">
+      <section class="contact-window">
+        <h1>Contact</h1>
+        <p>Let's build something together.</p>
+        <form>
+          <input type="text" placeholder="Name" />
+          <input type="email" placeholder="Email" />
+          <textarea placeholder="Message"></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </section>
+    </div>
 </body>
 </html>

@@ -104,7 +104,8 @@ a{
     background:transparent;
 }
 
-.desktop-nav a{
+.desktop-nav a,
+.desktop-nav button{
     font-family:"Instrument Sans",sans-serif;
     font-size:1rem;
     font-weight:500;
@@ -118,7 +119,8 @@ a{
     transition:.2s ease;
 }
 
-.desktop-nav a:hover{
+.desktop-nav a:hover,
+.desktop-nav button:hover{
     opacity:.65;
 }
 
