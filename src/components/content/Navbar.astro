@@ -1,0 +1,21 @@
+---
+const navApps = [
+    { app: "projects", label: "PROJECTS" },
+    { app: "resume",   label: "RESUME"   },
+    { app: "fun",      label: "FUN"      },
+    { app: "contact",  label: "CONTACT"  },
+];
+---
+
+<nav class="desktop-nav">
+
+    {navApps.map((item) => (
+        <button
+            type="button"
+            data-app={item.app}
+        >
+            {item.label}
+        </button>
+    ))}
+
+</nav>
