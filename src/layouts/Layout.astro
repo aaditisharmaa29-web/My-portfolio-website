@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { appByUrl } from "../data/apps";
+import Navbar from "../components/content/Navbar.astro";
 import Desktop from "../components/Desktop.astro";
 import WindowShell from "../components/WindowShell.astro";
 import ResumeContent from "../components/content/ResumeContent.astro";
@@ -23,27 +24,33 @@ const currentApp = appByUrl(Astro.url.pathname);
   </head>
   <body data-current-app={currentApp}>
     <main class="homepage">
-  <div class="mac-frame" transition:persist="desktop">
-        <!-- one rigid group: everything inside moves together, nothing can misalign -->
-        <div class="mac-case">
-          <div class="mac-bezel">
-            <div class="mac-bezel-top" aria-hidden="true"></div>
-            <div class="mac-bezel-side" aria-hidden="true"></div>
-          </div>
-          <div class="mac-chin">
-            <div class="mac-logo" aria-hidden="true"></div>
-            <div class="mac-disk-slot" aria-hidden="true"></div>
+      <Navbar currentApp={currentApp} />
+
+      <div class="scene">
+        <div class="mac-container">
+          <div class="mac-frame" transition:persist="desktop">
+            <!-- one rigid group: everything inside moves together, nothing can misalign -->
+            <div class="mac-case">
+              <div class="mac-bezel">
+                <div class="mac-bezel-top" aria-hidden="true"></div>
+                <div class="mac-bezel-side" aria-hidden="true"></div>
+              </div>
+              <div class="mac-chin">
+                <div class="mac-logo" aria-hidden="true"></div>
+                <div class="mac-disk-slot" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- screen: a sibling of .mac-case, so the drift never touches it -->
+            <div class="mac-screen-ring mac-screen-sticky">
+              <Desktop />
+              <div id="dock" class="dock"></div>
+            </div>
+
+            <div class="mac-stand-neck"></div>
+            <div class="mac-stand-base"></div>
           </div>
         </div>
-
-        <!-- screen: a sibling of .mac-case, so the drift never touches it -->
-        <div class="mac-screen-ring mac-screen-sticky">
-          <Desktop />
-          <div id="dock" class="dock"></div>
-        </div>
-
-        <div class="mac-stand-neck"></div>
-        <div class="mac-stand-base"></div>
       </div>
     </main>
 

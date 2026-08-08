@@ -110,9 +110,10 @@ a {
     opacity: .65;
 }
 
-.desktop-nav a[aria-current="page"] {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+.desktop-nav a[aria-current="page"],
+.desktop-nav button[aria-current="page"] {
+text-decoration: underline;
+text-underline-offset: 4px;
 }
 
 /* ============================================================
@@ -425,22 +426,20 @@ a {
 ============================================================ */
 
 .window {
-    position: absolute;
-    top: 50px;
-    left: 60px;
-    width: 520px;
-    height: 360px;
-    display: flex;
-    flex-direction: column;
-    background: #ffffff;
-    border-radius: 0;
-    border: 2px solid #000000;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-    user-select: none;
-    z-index: 100; /* Guarantees window displays ON TOP of folders */
-    pointer-events: auto;
+position: absolute;
+top: 50px;
+left: 110px; /* clears the desktop-icon column (15px–85px) */
+width: 520px;
+height: 360px;
+display: flex;
+flex-direction: column;
+background: #ffffff;
+border-radius: 0;
+border: 2px solid #000000;
+box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+overflow: hidden;
 }
+
 
 .window.active {
     z-index: 200; /* Brings active window to top */

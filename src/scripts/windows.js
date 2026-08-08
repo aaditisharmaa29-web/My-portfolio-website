@@ -27,7 +27,7 @@ function clampEntry(entry, layer) {
 
   entry.w = w;
   entry.h = h;
-  entry.x = Number.isFinite(entry.x) ? Math.min(Math.max(entry.x, 0), maxX) : 40;
+  entry.x = Number.isFinite(entry.x) ? Math.min(Math.max(entry.x, 0), maxX) : 110;
   entry.y = Number.isFinite(entry.y) ? Math.min(Math.max(entry.y, TOP_MARGIN), maxY) : TOP_MARGIN;
 
   return entry;
@@ -115,7 +115,9 @@ function showWindows() {
     } else {
       stack.push({
         app: current,
-        x: 40 + stack.length * 24,
+        // 110px clears the desktop-icon column (left:15px, 70px wide) so a
+        // freshly opened window never opens directly on top of the folders.
+        x: 110 + stack.length * 24,
         y: TOP_MARGIN + stack.length * 24,
         w: 520,
         h: 360,
@@ -241,6 +243,13 @@ document.addEventListener("click", (event) => {
   const icon = event.target.closest(".desktop-icon");
   if (icon) {
     navigate(icon.dataset.url);
+    return;
+  }
+
+  const navButton = event.target.closest(".desktop-nav button[data-app]");
+  if (navButton) {
+    const app = getApp(navButton.dataset.app);
+    if (app) navigate(app.url);
     return;
   }
 

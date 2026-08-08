@@ -1,4 +1,6 @@
 ---
+const { currentApp = "" } = Astro.props;
+
 const navApps = [
     { app: "projects", label: "PROJECTS" },
     { app: "resume",   label: "RESUME"   },
@@ -13,6 +15,7 @@ const navApps = [
         <button
             type="button"
             data-app={item.app}
+            aria-current={item.app === currentApp ? "page" : undefined}
         >
             {item.label}
         </button>
