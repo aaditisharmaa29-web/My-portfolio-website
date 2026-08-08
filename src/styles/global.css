@@ -6,173 +6,173 @@
 
 *,
 *::before,
-*::after{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
-body{
-    width:100%;
-    height:100%;
+body {
+    width: 100%;
+    height: 100%;
 
-    overflow-y:auto;
-    overflow-x:hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-body{
-    font-family:"Geneva", "Chicago", "Instrument Sans", sans-serif;
-    background:#e3d6df;
-    color:#3f3f3f;
+body {
+    font-family: "Geneva", "Chicago", "Instrument Sans", sans-serif;
+    background: #e3d6df;
+    color: #3f3f3f;
 }
 
-img{
-    display:block;
-    max-width:100%;
-    user-select:none;
-    -webkit-user-drag:none;
+img {
+    display: block;
+    max-width: 100%;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-button{
-    font:inherit;
-    border:none;
-    background:none;
-    cursor:pointer;
-    outline:none;
+button {
+    font: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 /* ============================================================
    HOMEPAGE
 ============================================================ */
 
-.homepage{
-    width:100vw;
-    min-height:100vh;
+.homepage {
+    width: 100vw;
+    min-height: 100vh;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    justify-content:flex-start;
+    justify-content: flex-start;
 
-    padding-top:12px;
+    padding-top: 12px;
 
-    gap:36px;
+    gap: 36px;
 }
 
 /* ============================================================
    SCENE
 ============================================================ */
 
-.scene{
-    position:relative;
-    width:min(100vw,1600px);
-    aspect-ratio:1536/925;
+.scene {
+    position: relative;
+    width: min(100vw, 1600px);
+    aspect-ratio: 1536/925;
 
-    background-image:url("/images/homepage-bg.png");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background-image: url("/images/homepage-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* ============================================================
    NAVBAR
 ============================================================ */
 
-.desktop-nav{
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    gap:48px;
-    padding:16px 36px;
+    gap: 48px;
+    padding: 16px 36px;
 
-    margin-top:0;
-    margin-bottom:-8px;
+    margin-top: 0;
+    margin-bottom: -8px;
 
-    border:2px solid #3d383c;
-    border-radius:999px;
+    border: 2px solid #3d383c;
+    border-radius: 999px;
 
-    background:transparent;
+    background: transparent;
 }
 
 .desktop-nav a,
-.desktop-nav button{
-    font-family:"Instrument Sans",sans-serif;
-    font-size:1rem;
-    font-weight:500;
+.desktop-nav button {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
 
-    letter-spacing:.03em;
-    text-transform:uppercase;
+    letter-spacing: .03em;
+    text-transform: uppercase;
 
-    color:#3c373b;
-    cursor:pointer;
+    color: #3c373b;
+    cursor: pointer;
 
-    transition:.2s ease;
+    transition: .2s ease;
 }
 
 .desktop-nav a:hover,
-.desktop-nav button:hover{
-    opacity:.65;
+.desktop-nav button:hover {
+    opacity: .65;
 }
 
-.desktop-nav a[aria-current="page"]{
-    text-decoration:underline;
-    text-underline-offset:4px;
+.desktop-nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 /* ============================================================
    MAC
 ============================================================ */
 
-.mac-container{
-    position:absolute;
-    left:50%;
-    bottom:-5%;
-    transform:translateX(-50%);
+.mac-container {
+    position: absolute;
+    left: 50%;
+    bottom: -5%;
+    transform: translateX(-50%);
 }
 
-.mac-frame{
+.mac-frame {
     width: 1280px;
-    max-width:90vw;
+    max-width: 90vw;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    transform:scale(0.9);
-    transform-origin:top center;
+    transform: scale(0.9);
+    transform-origin: top center;
 }
 
 /* Beige outer case - top corners rounded much more than bottom,
    like the original compact Mac silhouette */
-.mac-bezel{
-    width:100%;
-    background:linear-gradient(180deg, #f2ede0 0%, #e6e0cd 100%);
-    border-radius:64px 64px 20px 20px;
-    padding:34px 34px 22px;
+.mac-bezel {
+    width: 100%;
+    background: linear-gradient(180deg, #f2ede0 0%, #e6e0cd 100%);
+    border-radius: 64px 64px 20px 20px;
+    padding: 34px 34px 22px;
     box-shadow:
-        0 18px 40px rgba(0,0,0,.18),
-        0 6px 12px rgba(0,0,0,.08),
-        inset 0 1px 0 rgba(255,255,255,.5);
+        0 18px 40px rgba(0, 0, 0, .18),
+        0 6px 12px rgba(0, 0, 0, .08),
+        inset 0 1px 0 rgba(255, 255, 255, .5);
 }
 
 /* Black inner ring that frames the screen */
-.mac-screen-ring{
-    background:#141414;
-    border-radius:30px 30px 12px 12px;
-    padding:18px;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
-    display:flex;
-    flex-direction:column;
+.mac-screen-ring {
+    background: #141414;
+    border-radius: 30px 30px 12px 12px;
+    padding: 18px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05);
+    display: flex;
+    flex-direction: column;
 }
 
 /* ============================================================
@@ -198,7 +198,8 @@ a{
     position: relative;
     width: 100%;
     height: 100%;
-    background: transparent; /* Allows wallpaper beneath to show through */
+    background: transparent;
+    /* Allows wallpaper beneath to show through */
     overflow: hidden;
 }
 
@@ -206,141 +207,141 @@ a{
    MENU BAR (classic Mac OS top strip w/ live clock)
 ============================================================ */
 
-.menu-bar{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:28px;
-    z-index:9999;
+.menu-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    z-index: 9999;
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    padding:0 10px;
+    padding: 0 10px;
 
-    background:#f4f2ea;
-    border-bottom:2px solid #1a1a1a;
+    background: #f4f2ea;
+    border-bottom: 2px solid #1a1a1a;
 
-    font-family:"Geneva", "Chicago", "Instrument Sans", sans-serif;
-    font-size:14px;
-    color:#1a1a1a;
+    font-family: "Geneva", "Chicago", "Instrument Sans", sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
 
-    user-select:none;
+    user-select: none;
 }
 
 .menu-bar-left,
-.menu-bar-right{
-    display:flex;
-    align-items:center;
-    gap:18px;
+.menu-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
-.menu-apple{
-    font-size:16px;
-    line-height:1;
+.menu-apple {
+    font-size: 16px;
+    line-height: 1;
 }
 
-.menu-item{
-    cursor:default;
+.menu-item {
+    cursor: default;
 }
 
-#menu-clock{
-    font-variant-numeric:tabular-nums;
-    letter-spacing:.02em;
+#menu-clock {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
 }
 
 /* Lower panel of the case: logo badge + floppy disk slot */
-.mac-chin{
-    width:100%;
-    height:120px;
+.mac-chin {
+    width: 100%;
+    height: 120px;
 
-    background:linear-gradient(180deg, #e6e0cd 0%, #d9d3bd 100%);
+    background: linear-gradient(180deg, #e6e0cd 0%, #d9d3bd 100%);
 
-    border-radius:0 0 34px 34px;
+    border-radius: 0 0 34px 34px;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    padding:0 44px;
+    padding: 0 44px;
 }
 
 /* Simple neutral badge mark - swap in your own logo/monogram if you like */
-.mac-logo{
-    width:26px;
-    height:26px;
+.mac-logo {
+    width: 26px;
+    height: 26px;
 
-    border-radius:50%;
+    border-radius: 50%;
 
-    background:linear-gradient(180deg, #ffffff, #cfc9b4);
-    box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);
+    background: linear-gradient(180deg, #ffffff, #cfc9b4);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
 }
 
-.mac-disk-slot{
-    position:relative;
+.mac-disk-slot {
+    position: relative;
 
-    width:220px;
-    height:14px;
+    width: 220px;
+    height: 14px;
 
-    background:#232323;
-    border-radius:3px;
+    background: #232323;
+    border-radius: 3px;
 
-    box-shadow:inset 0 1px 2px rgba(0,0,0,.6);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6);
 }
 
-.mac-disk-slot::after{
-    content:"";
-    position:absolute;
-    top:-4px;
-    right:6px;
+.mac-disk-slot::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: 6px;
 
-    width:36px;
-    height:22px;
+    width: 36px;
+    height: 22px;
 
-    background:linear-gradient(180deg, #3a3a3a, #262626);
-    border-radius:3px;
+    background: linear-gradient(180deg, #3a3a3a, #262626);
+    border-radius: 3px;
 }
 
-.mac-stand-neck{
-    width:100px;
-    height:70px;
-    background:linear-gradient(#e6e0cd, #cfc9b2);
+.mac-stand-neck {
+    width: 100px;
+    height: 70px;
+    background: linear-gradient(#e6e0cd, #cfc9b2);
 }
 
-.mac-stand-base{
-    width:320px;
-    height:18px;
+.mac-stand-base {
+    width: 320px;
+    height: 18px;
 
-    background:linear-gradient(180deg, #d9d3bd, #c8c2a9);
+    background: linear-gradient(180deg, #d9d3bd, #c8c2a9);
 
-    border-radius:6px;
+    border-radius: 6px;
 
-    margin-top:-2px;
+    margin-top: -2px;
 }
 
 /* ============================================================
    DESKTOP
 ============================================================ */
 
-.desktop{
-    position:relative;
-    width:100%;
-    height:100%;
-    background:#fdfcf9;
-    overflow:hidden;
+.desktop {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fdfcf9;
+    overflow: hidden;
 }
 
 /* ============================================================
    WINDOW LAYER
 ============================================================ */
 
-.window-layer{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-
+.window-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 20;
 }
 
 /* ============================================================
@@ -348,272 +349,277 @@ a{
 ============================================================ */
 
 .desktop-icons {
-  position: absolute;
-  top: 45px;        /* Keeps it just below your top menu bar */
-  left: 5px;       /* Position on the left side instead of right */
-  right: auto;      /* Resets any previously set right alignment */
-  
-  display: flex;
-  flex-direction: column; /* Stacks folders vertically */
-  gap: 20px;         /* Spacing between folders */
-  z-index: 10;       /* Ensures icons stay clickable */
+    position: absolute;
+    top: 45px;
+    /* Keeps it just below your top menu bar */
+    left: 5px;
+    /* Position on the left side instead of right */
+    right: auto;
+    /* Resets any previously set right alignment */
+
+    display: flex;
+    flex-direction: column;
+    /* Stacks folders vertically */
+    gap: 20px;
+    /* Spacing between folders */
+    z-index: 10;
+    /* Ensures icons stay clickable */
 }
 
 .desktop-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.desktop-icon:hover .folder-icon{
-    filter:brightness(1.05);
+.desktop-icon:hover .folder-icon {
+    filter: brightness(1.05);
 }
 
 .desktop-icon:active .folder-icon,
-.desktop-icon:focus-visible .folder-icon{
-    filter:brightness(0.92);
+.desktop-icon:focus-visible .folder-icon {
+    filter: brightness(0.92);
 }
 
-.icon-label{
-    font-family:"Geneva","Chicago","Instrument Sans", sans-serif;
-    font-size:12px;
-    color:#fff;
-    text-shadow:0 1px 2px rgba(0,0,0,.6);
-    text-align:center;
-    line-height:1.2;
+.icon-label {
+    font-family: "Geneva", "Chicago", "Instrument Sans", sans-serif;
+    font-size: 12px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    text-align: center;
+    line-height: 1.2;
 }
 
-.folder-icon{
-    position:relative;
-    width:52px;
-    height:38px;
+.folder-icon {
+    position: relative;
+    width: 52px;
+    height: 38px;
 
-    border-radius:2px 6px 6px 6px;
-    border:1px solid rgba(0,0,0,.35);
-    box-shadow:0 3px 6px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.35);
+    border-radius: 2px 6px 6px 6px;
+    border: 1px solid rgba(0, 0, 0, .35);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .35);
 }
 
-.folder-icon::before{
-    content:"";
-    position:absolute;
-    top:-7px;
-    left:0;
-    width:24px;
-    height:9px;
+.folder-icon::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 0;
+    width: 24px;
+    height: 9px;
 
-    background:inherit;
-    border:inherit;
-    border-bottom:none;
+    background: inherit;
+    border: inherit;
+    border-bottom: none;
 
-    border-radius:3px 5px 0 0;
+    border-radius: 3px 5px 0 0;
 }
 
-.folder-blue{
-    background:#a9d6f5;
+.folder-blue {
+    background: #a9d6f5;
 }
 
-.folder-orange{
-    background:#f5a94e;
+.folder-orange {
+    background: #f5a94e;
 }
 
-.folder-green{
-    background:#8fd18f;
+.folder-green {
+    background: #8fd18f;
 }
 
-.folder-white{
-    background:#f7f7f2;
+.folder-white {
+    background: #f7f7f2;
 }
 
 /* ============================================================
    CLASSIC VINTAGE MAC WINDOW
 ============================================================ */
 
-.window{
-    position:absolute;
+.window {
+    position: absolute;
 
-    top:50px;
-    left:60px;
+    top: 50px;
+    left: 60px;
 
-    width:520px;
-    height:360px;
+    width: 520px;
+    height: 360px;
 
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 
-    background:#ffffff;
+    background: #ffffff;
 
-    border-radius:0; /* Sharp retro corners */
-    border:2px solid #000000; /* Crisp dark border */
+    border-radius: 0;
+    /* Sharp retro corners */
+    border: 2px solid #000000;
+    /* Crisp dark border */
 
     /* Vintage pixelated drop shadow */
-    box-shadow:4px 4px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
 
-    overflow:hidden;
+    overflow: hidden;
 
-    user-select:none;
+    user-select: none;
 }
 
 /* ============================================================
    CLASSIC PINSTRIPE HEADER
 ============================================================ */
 
-.window-header{
-    position:relative;
+.window-header {
+    position: relative;
 
-    height:24px;
+    height: 24px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     /* Vintage Mac Horizontal Pinstripes */
-    background: repeating-linear-gradient(
-        to bottom,
-        #000000 0px,
-        #000000 1px,
-        #ffffff 1px,
-        #ffffff 2px
-    );
+    background: repeating-linear-gradient(to bottom,
+            #000000 0px,
+            #000000 1px,
+            #ffffff 1px,
+            #ffffff 2px);
 
-    border-bottom:2px solid #000000;
+    border-bottom: 2px solid #000000;
 
-    cursor:grab;
-    padding:0 6px;
+    cursor: grab;
+    padding: 0 6px;
 }
 
-.window-header:active{
-    cursor:grabbing;
+.window-header:active {
+    cursor: grabbing;
 }
 
 /* ============================================================
    CLASSIC WINDOW TITLE
 ============================================================ */
 
-.window-title{
-    font-family:"Geneva", "Chicago", "Courier New", sans-serif;
-    font-size:.75rem;
-    font-weight:700;
-    letter-spacing:.05em;
-    text-transform:uppercase;
+.window-title {
+    font-family: "Geneva", "Chicago", "Courier New", sans-serif;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
 
-    color:#000000;
-    background:#ffffff; /* Covers pinstripes behind title text */
-    padding:0 8px;
+    color: #000000;
+    background: #ffffff;
+    /* Covers pinstripes behind title text */
+    padding: 0 8px;
 
-    z-index:2;
+    z-index: 2;
 }
 
 /* ============================================================
    RETRO CONTROL BUTTONS (SYSTEM 7 CLOSE BOX)
 ============================================================ */
 
-.traffic-lights{
-    position:absolute;
-    left:6px;
-    top:50%;
-    transform:translateY(-50%);
+.traffic-lights {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
 
-    display:flex;
-    align-items:center;
-    gap:4px;
-    z-index:3;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 3;
 }
 
-.window-close{
-    width:13px;
-    height:13px;
+.window-close {
+    width: 13px;
+    height: 13px;
 
-    border-radius:0;
-    border:1px solid #000000;
-    background:#ffffff;
-    position:relative;
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #ffffff;
+    position: relative;
 
-    transition:none;
+    transition: none;
 }
 
 /* Classic inner box inside close button */
-.window-close::after{
-    content:"";
-    position:absolute;
-    top:2px;
-    left:2px;
-    right:2px;
-    bottom:2px;
-    border:1px solid #000000;
+.window-close::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid #000000;
 }
 
-.window-close:hover{
-    transform:none;
-    background:#000000;
+.window-close:hover {
+    transform: none;
+    background: #000000;
 }
 
-.window-close:hover::after{
-    border-color:#ffffff;
+.window-close:hover::after {
+    border-color: #ffffff;
 }
 
 /* Minimise and maximise buttons, styled like the close button */
 .window-minimise,
-.window-maximise{
-    width:13px;
-    height:13px;
+.window-maximise {
+    width: 13px;
+    height: 13px;
 
-    border-radius:0;
-    border:1px solid #000000;
-    background:#ffffff;
+    border-radius: 0;
+    border: 1px solid #000000;
+    background: #ffffff;
 
-    font-size:9px;
-    line-height:1;
-    color:#000000;
+    font-size: 9px;
+    line-height: 1;
+    color: #000000;
 
-    transition:none;
+    transition: none;
 }
 
 .window-minimise:hover,
-.window-maximise:hover{
-    background:#000000;
-    color:#ffffff;
+.window-maximise:hover {
+    background: #000000;
+    color: #ffffff;
 }
 
 /* ============================================================
    WINDOW CONTENT & RETRO SCROLLBARS
 ============================================================ */
 
-.window-content{
-    flex:1;
+.window-content {
+    flex: 1;
 
-    overflow:auto;
+    overflow: auto;
 
-    padding:20px;
+    padding: 20px;
 
-    background:#ffffff;
-    color:#000000;
-    font-family:"Geneva", "Chicago", sans-serif;
+    background: #ffffff;
+    color: #000000;
+    font-family: "Geneva", "Chicago", sans-serif;
 }
 
 /* Classic System 7 Webkit Scrollbars */
 .window-content::-webkit-scrollbar {
-    width:16px;
-    height:16px;
+    width: 16px;
+    height: 16px;
 }
 
 .window-content::-webkit-scrollbar-track {
-    background: repeating-linear-gradient(
-        45deg,
-        #e0e0e0,
-        #e0e0e0 1px,
-        #ffffff 1px,
-        #ffffff 2px
-    );
-    border-left:1px solid #000000;
+    background: repeating-linear-gradient(45deg,
+            #e0e0e0,
+            #e0e0e0 1px,
+            #ffffff 1px,
+            #ffffff 2px);
+    border-left: 1px solid #000000;
 }
 
 .window-content::-webkit-scrollbar-thumb {
-    background:#ffffff;
-    border:1px solid #000000;
+    background: #ffffff;
+    border: 1px solid #000000;
     box-shadow: inset -1px -1px 0 #888888, inset 1px 1px 0 #ffffff;
 }
 
@@ -621,47 +627,54 @@ a{
    RESIZE HANDLE
 ============================================================ */
 
-.resize-handle{
-    position:absolute;
-    right:0;
-    bottom:0;
+.resize-handle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 
-    width:16px;
-    height:16px;
+    width: 16px;
+    height: 16px;
 
-    cursor:nwse-resize;
+    cursor: nwse-resize;
 
-    border-top:1px solid #000000;
-    border-left:1px solid #000000;
-    background:#ffffff;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    background: #ffffff;
     background-image:
         linear-gradient(135deg, #000000 25%, transparent 25%),
         linear-gradient(225deg, #000000 25%, transparent 25%);
-    background-size:4px 4px;
+    background-size: 4px 4px;
 }
 
 /* ============================================================
    WINDOW STATES
 ============================================================ */
 
-.window.hidden{
-    display:none;
+.window.hidden {
+    display: none;
 }
 
 /* Played once when a window is freshly opened (added by windows.js) */
-@keyframes window-open{
-    from{ opacity:0; transform:scale(.92); }
-    to{ opacity:1; transform:scale(1); }
+@keyframes window-open {
+    from {
+        opacity: 0;
+        transform: scale(.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.window--opening{
-    animation:window-open .22s cubic-bezier(.2,.7,.3,1);
-    transform-origin:top left;
+.window--opening {
+    animation: window-open .22s cubic-bezier(.2, .7, .3, 1);
+    transform-origin: top left;
 }
 
-@media (prefers-reduced-motion:reduce){
-    .window--opening{
-        animation:none;
+@media (prefers-reduced-motion:reduce) {
+    .window--opening {
+        animation: none;
     }
 }
 
@@ -669,95 +682,91 @@ a{
    DOCK (bottom bar for minimised windows)
 ============================================================ */
 
-.dock{
-    order:2;
-    flex:none;
+.dock {
+    order: 2;
+    flex: none;
 
-    width:100%;
-    height:28px;
+    width: 100%;
+    height: 28px;
 
-    display:flex;
-    align-items:center;
-    gap:10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-    padding:0 10px;
-    margin-top:12px;
+    padding: 0 10px;
+    margin-top: 12px;
 
-    background:#f2f2ee;
-    border-top:2px solid #1a1a1a;
-    border-radius:0 0 12px 12px;
+    background: #f2f2ee;
+    border-top: 2px solid #1a1a1a;
+    border-radius: 0 0 12px 12px;
 }
 
 
-.dock-item{
-    pointer-events:auto;
+.dock-item {
+    pointer-events: auto;
 
-    display:flex;
-    align-items:center;
-    gap:6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 
-    padding:3px 12px;
-    border:1px solid rgba(0,0,0,.4);
-    border-radius:8px;
-    background:#fff;
+    padding: 3px 12px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    border-radius: 8px;
+    background: #fff;
 
-    font-family:"Geneva","Chicago","Instrument Sans", sans-serif;
-    font-size:12px;
-    color:#1a1a1a;
-    cursor:pointer;
+    font-family: "Geneva", "Chicago", "Instrument Sans", sans-serif;
+    font-size: 12px;
+    color: #1a1a1a;
+    cursor: pointer;
 }
 
-.dock-item:hover{
-    background:#eee;
+.dock-item:hover {
+    background: #eee;
 }
 
-.dock-item-dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#f5c542;
-    flex:none;
+.dock-item-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f5c542;
+    flex: none;
 }
 
-.window.maximised{
-    top:0 !important;
-    left:0 !important;
-    width:100% !important;
-    height:100% !important;
-    border-radius:0;
+.window.maximised {
+    top: 28px left:0 width:100% height:calc(100% - 28px) border-radius:0;
 }
 
-.window.dragging{
-    transition:none;
+.window.dragging {
+    transition: none;
 }
 
 /* ============================================================
    RESPONSIVE
 ============================================================ */
 
-@media (max-width:1200px){
-    .mac-frame{
-        width:80vw;
+@media (max-width:1200px) {
+    .mac-frame {
+        width: 80vw;
     }
 
-    .mac-screen{
-        height:50vw;
+    .mac-screen {
+        height: 50vw;
     }
 }
 
-@media (max-width:768px){
-    .desktop-nav{
-        gap:10px;
-        padding:10px 18px;
+@media (max-width:768px) {
+    .desktop-nav {
+        gap: 10px;
+        padding: 10px 18px;
     }
 
-    .desktop-nav a{
-        font-size:.65rem;
+    .desktop-nav a {
+        font-size: .65rem;
     }
 
-    .window{
-        width:88%;
-        height:75%;
+    .window {
+        width: 88%;
+        height: 75%;
     }
 }
 
@@ -766,48 +775,50 @@ a{
 ============================================================ */
 
 .traffic-lights {
-  position: absolute;
-  left: 6px;
-  top: 50%;
-  transform: translateY(-50%);
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
 
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 3;
 }
 
 /* Base style for all 3 header buttons */
 .window-close,
 .window-minimise,
 .window-maximise {
-  display: flex !important; /* Unhide minimize and maximize */
-  align-items: center;
-  justify-content: center;
+    display: flex !important;
+    /* Unhide minimize and maximize */
+    align-items: center;
+    justify-content: center;
 
-  width: 14px;
-  height: 14px;
+    width: 14px;
+    height: 14px;
 
-  font-family: "Geneva", "Chicago", sans-serif;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1;
+    font-family: "Geneva", "Chicago", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
 
-  border: 1px solid #000000;
-  background: #ffffff;
-  color: #000000;
+    border: 1px solid #000000;
+    background: #ffffff;
+    color: #000000;
 
-  border-radius: 0; /* Retro square edges */
-  cursor: pointer;
-  transition: none;
+    border-radius: 0;
+    /* Retro square edges */
+    cursor: pointer;
+    transition: none;
 }
 
 /* Hover effects for buttons */
 .window-close:hover,
 .window-minimise:hover,
 .window-maximise:hover {
-  background: #000000;
-  color: #ffffff;
+    background: #000000;
+    color: #ffffff;
 }
 
 /* ============================================================
@@ -815,23 +826,23 @@ a{
 ============================================================ */
 
 .resize-handle {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
 
-  cursor: nwse-resize;
+    cursor: nwse-resize;
 
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  background: #ffffff;
-  background-image:
-    linear-gradient(135deg, #000000 25%, transparent 25%),
-    linear-gradient(225deg, #000000 25%, transparent 25%);
-  background-size: 4px 4px;
-  z-index: 10;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    background: #ffffff;
+    background-image:
+        linear-gradient(135deg, #000000 25%, transparent 25%),
+        linear-gradient(225deg, #000000 25%, transparent 25%);
+    background-size: 4px 4px;
+    z-index: 10;
 }
 
 /* ============================================================
@@ -840,80 +851,81 @@ a{
 
 /* Dark Blue Folder Variant */
 .folder-darkblue {
-  background: #56789d !important;
+    background: #56789d !important;
 }
 
 /* Projects Navigation Toolbar */
 .projects-toolbar {
-  display: flex;
-  align-items: center;
-  min-height: 28px;
-  margin-bottom: -40px;
-  padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    margin-bottom: -40px;
+    padding-bottom: 8px;
 }
 
 /* Retro System 7 Back Button */
 .retro-back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 8px;
-  font-family: "Geneva", "Chicago", sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  color: #56789d;
-  background: #ffffff;
-  border: 1px solid #000000;
-  box-shadow: 1px 1px 0px #000000;
-  cursor: pointer;
-  user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 8px;
+    font-family: "Geneva", "Chicago", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #56789d;
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 1px 1px 0px #000000;
+    cursor: pointer;
+    user-select: none;
 }
 
 .retro-back-btn:hover {
-  background: #000000;
-  color: #ffffff;
+    background: #000000;
+    color: #ffffff;
 }
 
 .retro-back-btn:active {
-  box-shadow: none;
-  transform: translate(1px, 1px);
+    box-shadow: none;
+    transform: translate(1px, 1px);
 }
 
 /* Sub-folder Grid inside Projects Window */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 20px;
-  padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
 }
 
 .project-folder-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  background: none;
-  border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    background: none;
+    border: none;
 }
 
 .project-folder-item:hover .folder-icon {
-  filter: brightness(1.15);
+    filter: brightness(1.15);
 }
 
 .project-folder-item .icon-label {
-  color: #000000; /* Dark text inside the white window body */
-  text-shadow: none;
-  font-size: 11px;
+    color: #000000;
+    /* Dark text inside the white window body */
+    text-shadow: none;
+    font-size: 11px;
 }
 
 /* Project Detail View Container */
 .project-detail-view {
-  display: none;
-  padding: 10px 0;
-  margin-top: 30px;
+    display: none;
+    padding: 10px 0;
+    margin-top: 30px;
 }
 
 .project-detail-view.active {
-  display: block;
+    display: block;
 }

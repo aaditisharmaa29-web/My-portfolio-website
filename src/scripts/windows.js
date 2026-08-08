@@ -3,6 +3,7 @@
 // so the last entry in the list is the window in front.
 
 import { navigate } from "astro:transitions/client";
+import { Draggable } from "@neodrag/vanilla";
 import { APPS } from "../data/apps";
 
 const KEY = "desktop:windows";
@@ -27,6 +28,58 @@ function loadStack() {
 
 function saveStack(stack) {
   localStorage.setItem(KEY, JSON.stringify(stack));
+}
+
+// Live @neodrag/vanilla instance per window element. neodrag's drag offset
+// is cumulative from the moment the instance is created, so we rebuild the
+// instance (fresh baseline, offset back to zero) every time a window's
+// left/top is set from outside a drag — new windows, restores, and right
+// after a drag ends.
+const draggables = new WeakMap();
+
+function initDrag(win) {
+  draggables.get(win)?.destroy();
+
+  const startLeft = parseInt(win.style.left) || 0;
+  const startTop = parseInt(win.style.top) || 0;
+
+  const instance = new Draggable(win, {
+    handle: ".window-header",
+    cancel: ".traffic-lights",
+    bounds: "parent",
+    disabled: win.classList.contains("maximised"),
+    // Reuses the existing `.window.dragging { transition: none }` rule.
+    defaultClassDragging: "dragging",
+    onDragEnd: ({ offsetX, offsetY }) => {
+      // neodrag moved the window with a GPU-accelerated `translate` during
+      // the drag (smooth, no layout thrashing). Bake that offset into
+      // left/top now so positioning + persistence keep working exactly as
+      // before, and reset translate so nothing is applied twice.
+      const left = startLeft + offsetX;
+      const top = startTop + offsetY;
+      win.style.left = left + "px";
+      win.style.top = top + "px";
+      win.style.translate = "0px 0px";
+
+      const stack = loadStack();
+      const entry = stack.find((e) => e.app === win.dataset.app);
+      if (entry) {
+        entry.x = left;
+        entry.y = top;
+        saveStack(stack);
+      }
+
+      // Rebuild so the next drag starts from a clean, zeroed baseline.
+      initDrag(win);
+    },
+  });
+
+  draggables.set(win, instance);
+}
+
+function destroyDrag(win) {
+  draggables.get(win)?.destroy();
+  draggables.delete(win);
 }
 
 // Runs on every page load. Rebuilds the windows on screen from the
@@ -61,6 +114,7 @@ function showWindows() {
   // remove windows that are no longer in the stack
   for (const win of layer.querySelectorAll(".window")) {
     if (!stack.find((entry) => entry.app === win.dataset.app)) {
+      destroyDrag(win);
       win.remove();
     }
   }
@@ -88,6 +142,7 @@ function showWindows() {
     win.style.height = entry.h + "px";
     win.style.zIndex = index + 1;
     win.classList.toggle("hidden", entry.min);
+    initDrag(win);
   });
 
   updateDock(stack);
@@ -114,7 +169,10 @@ function closeWindow(app) {
   saveStack(stack);
 
   const win = document.querySelector(`.window[data-app="${app}"]`);
-  if (win) win.remove();
+  if (win) {
+    destroyDrag(win);
+    win.remove();
+  }
   updateDock(stack);
 
   // closing the current page's window goes to the window below it,
@@ -192,6 +250,7 @@ document.addEventListener("click", (event) => {
   }
   if (event.target.closest(".window-maximise")) {
     win.classList.toggle("maximised");
+    draggables.get(win)?.updateOptions({ disabled: win.classList.contains("maximised") });
     return;
   }
 
@@ -213,73 +272,43 @@ document.addEventListener("click", (event) => {
   }
 });
 
-// Dragging and resizing.
-let dragging = null;
+// Dragging is handled per-window by @neodrag/vanilla (see initDrag above).
+// Resizing stays manual — neodrag is a drag-only library.
 let resizing = null;
 
 document.addEventListener("mousedown", (event) => {
   const handle = event.target.closest(".resize-handle");
-  const header = event.target.closest(".window-header");
-
-  if (handle) {
-    const win = handle.closest(".window");
-    resizing = {
-      win,
-      startW: win.offsetWidth,
-      startH: win.offsetHeight,
-      startX: event.clientX,
-      startY: event.clientY,
-    };
-  } else if (header && !event.target.closest("button")) {
-    const win = header.closest(".window");
-    if (win.classList.contains("maximised")) return;
-    const rect = win.getBoundingClientRect();
-    dragging = {
-      win,
-      offsetX: event.clientX - rect.left,
-      offsetY: event.clientY - rect.top,
-    };
-  }
+  if (!handle) return;
+  const win = handle.closest(".window");
+  resizing = {
+    win,
+    startW: win.offsetWidth,
+    startH: win.offsetHeight,
+    startX: event.clientX,
+    startY: event.clientY,
+  };
 });
 
 document.addEventListener("mousemove", (event) => {
-  const desktop = document.getElementById("desktop");
-  if (!desktop) return;
-  const bounds = desktop.getBoundingClientRect();
-
-  if (dragging) {
-    const win = dragging.win;
-    let x = event.clientX - bounds.left - dragging.offsetX;
-    let y = event.clientY - bounds.top - dragging.offsetY;
-    x = Math.max(0, Math.min(x, bounds.width - win.offsetWidth));
-    y = Math.max(0, Math.min(y, bounds.height - win.offsetHeight));
-    win.style.left = x + "px";
-    win.style.top = y + "px";
-  }
-
-  if (resizing) {
-    const win = resizing.win;
-    const w = resizing.startW + event.clientX - resizing.startX;
-    const h = resizing.startH + event.clientY - resizing.startY;
-    win.style.width = Math.max(320, w) + "px";
-    win.style.height = Math.max(220, h) + "px";
-  }
+  if (!resizing) return;
+  const win = resizing.win;
+  const w = resizing.startW + event.clientX - resizing.startX;
+  const h = resizing.startH + event.clientY - resizing.startY;
+  win.style.width = Math.max(320, w) + "px";
+  win.style.height = Math.max(220, h) + "px";
 });
 
 document.addEventListener("mouseup", () => {
-  const moved = dragging ? dragging.win : resizing ? resizing.win : null;
-  dragging = null;
+  if (!resizing) return;
+  const win = resizing.win;
   resizing = null;
-  if (!moved) return;
 
-  // save the new position and size
+  // save the new size
   const stack = loadStack();
-  const entry = stack.find((e) => e.app === moved.dataset.app);
+  const entry = stack.find((e) => e.app === win.dataset.app);
   if (entry) {
-    entry.x = parseInt(moved.style.left);
-    entry.y = parseInt(moved.style.top);
-    entry.w = moved.offsetWidth;
-    entry.h = moved.offsetHeight;
+    entry.w = win.offsetWidth;
+    entry.h = win.offsetHeight;
     saveStack(stack);
   }
 });
