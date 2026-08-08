@@ -148,13 +148,8 @@ a{
     flex-direction:column;
     align-items:center;
 
-    transform:scale(0.55);
+    transform:scale(0.9);
     transform-origin:top center;
-    transition:transform .6s cubic-bezier(.4,0,.2,1);
-}
-
-.mac-frame.zoomed{
-    transform:scale(1.15);
 }
 
 /* Beige outer case - top corners rounded much more than bottom,
@@ -560,20 +555,9 @@ a{
     border-color:#ffffff;
 }
 
-/* Hide modern Mac yellow/green traffic buttons */
+/* Minimise and maximise buttons, styled like the close button */
 .window-minimise,
 .window-maximise{
-    display:none;
-}
-
-/* Static windows (standalone routed pages) show functional
-   minimise / maximise controls, styled like the close button */
-.window--static .window-minimise,
-.window--static .window-maximise{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     width:13px;
     height:13px;
 
@@ -588,8 +572,8 @@ a{
     transition:none;
 }
 
-.window--static .window-minimise:hover,
-.window--static .window-maximise:hover{
+.window-minimise:hover,
+.window-maximise:hover{
     background:#000000;
     color:#ffffff;
 }
@@ -656,40 +640,29 @@ a{
     background-size:4px 4px;
 }
 
-.window--static{
-    position:relative;
-    top:auto;
-    left:auto;
-
-    width:100%;
-    max-width:640px;
-    height:auto;
-    min-height:420px;
-
-    margin:24px auto;
-}
-
-.window--static .resize-handle{
-    display:none;
-}
-
-.window--static.maximised{
-    max-width:100%;
-    position:fixed;
-    inset:0;
-    margin:0;
-}
-
-.window--static.dragging{
-    max-width:none;
-}
-
 /* ============================================================
    WINDOW STATES
 ============================================================ */
 
 .window.hidden{
     display:none;
+}
+
+/* Played once when a window is freshly opened (added by windows.js) */
+@keyframes window-open{
+    from{ opacity:0; transform:scale(.92); }
+    to{ opacity:1; transform:scale(1); }
+}
+
+.window--opening{
+    animation:window-open .22s cubic-bezier(.2,.7,.3,1);
+    transform-origin:top left;
+}
+
+@media (prefers-reduced-motion:reduce){
+    .window--opening{
+        animation:none;
+    }
 }
 
 /* ============================================================
@@ -786,40 +759,6 @@ a{
         width:88%;
         height:75%;
     }
-}
-
-.back-button{
-    position:fixed;
-    top:24px;
-    left:24px;
-
-    width:44px;
-    height:44px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:2px solid #3d383c;
-    border-radius:50%;
-    background:#e3d6df;
-    color:#3c373b;
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:opacity .3s ease, background .2s ease, opacity .2s ease;
-
-    z-index:2000;
-}
-
-.back-button.visible{
-    opacity:1;
-    pointer-events:auto;
-}
-
-.back-button:hover{
-    opacity:.65;
 }
 
 /* ============================================================

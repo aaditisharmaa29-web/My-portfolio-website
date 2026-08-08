@@ -3,3 +3,5 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - '@astrojs/netlify@8.2.0'
+overrides:
+  sharp: 0.35.3
