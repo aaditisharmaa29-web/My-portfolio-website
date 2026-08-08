@@ -136,27 +136,55 @@ a {
     transform-origin: top center;
 }
 
+/* ============================================================
+   FLAT 2D CASE
+   No perspective, no rotateX/Y, no gradients or dotted texture —
+   just three solid flat panels (front / top / side) laid out with
+   plain 2D skew, the same trick flat isometric illustrations use.
+============================================================ */
+
 .mac-bezel {
+    position: relative;
     width: 100%;
-    background-color: #ebe4d3;
-    background-image: 
-        radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 0),
-        linear-gradient(180deg, #f5f0e1 0%, #dfd6c0 100%);
-    background-size: 3px 3px, 100% 100%;
-    border-radius: 40px 40px 20px 20px;
+    background: #e7dfca;
+    border-radius: 18px;
     padding: 34px 34px 22px;
-    box-shadow:
-        0 25px 50px -10px rgba(0, 0, 0, 0.4),
-        0 10px 20px -5px rgba(0, 0, 0, 0.2),
-        inset 0 2px 2px rgba(255, 255, 255, 0.8),
-        inset 0 -3px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* top panel: lightest tone, sheared with skewX so it reads as the
+   top of the case tilting back */
+.mac-bezel-top {
+    position: absolute;
+    top: -22px;
+    left: 8px;
+    right: 8px;
+    height: 24px;
+    background: #f6f1e0;
+    border-radius: 10px 10px 0 0;
+    transform: skewX(-32deg);
+    transform-origin: bottom left;
+}
+
+/* side panel: darkest tone, sheared with skewY so it reads as the
+   side of the case receding away from the viewer */
+.mac-bezel-side {
+    position: absolute;
+    top: 0;
+    bottom: -18px;
+    left: -22px;
+    width: 24px;
+    background: #cabf9e;
+    border-radius: 10px 0 0 10px;
+    transform: skewY(-38deg);
+    transform-origin: bottom right;
 }
 
 .mac-screen-ring {
+    position: relative;
     background: #141414;
-    border-radius: 30px 30px 12px 12px;
+    border-radius: 14px;
     padding: 18px;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05);
     display: flex;
     flex-direction: column;
 }
@@ -172,38 +200,7 @@ a {
     max-height: 72vh;
     border-radius: 4px;
     overflow: hidden;
-    background-color: #d9d3c4;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 0);
-    background-size: 4px 4px;
-}
-
-/* ADD THIS RIGHT BELOW .mac-screen: */
-.mac-screen::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 50;
-    pointer-events: none;
-    background: 
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 40%),
-        inset 0 3px 12px rgba(0, 0, 0, 0.85);
-}
-
-.mac-screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 51;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.15) 0px,
-        rgba(0, 0, 0, 0.15) 1px,
-        transparent 1px,
-        transparent 2px
-    );
-    opacity: 0.5;
+    background: #b8d4e8;
 }
 
 .desktop {
@@ -258,44 +255,30 @@ a {
     letter-spacing: .02em;
 }
 
-
-
 .mac-logo {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: linear-gradient(180deg, #ffffff, #cfc9b4);
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
+    background: #f6f1e0;
 }
 
 .mac-chin {
     width: 100%;
     height: 100px;
-    background-color: #e2dac7;
-    background-image: 
-        radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0),
-        linear-gradient(180deg, #dfd6c0 0%, #cec5ae 100%);
-    background-size: 3px 3px, 100% 100%;
-    border-radius: 0 0 24px 24px;
+    background: #d9d0b6;
+    border-radius: 0 0 18px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 44px;
-    border-top: 2px solid #b8af97;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .mac-disk-slot {
     position: relative;
     width: 230px;
-    height: 14px;
-    background: #0d0d0d;
+    height: 12px;
+    background: #232323;
     border-radius: 2px;
-    box-shadow: 
-        inset 0 4px 8px rgba(0, 0, 0, 0.95),
-        inset 0 -1px 2px rgba(255, 255, 255, 0.2),
-        0 1px 0 rgba(255, 255, 255, 0.7),
-        0 -1px 1px rgba(0, 0, 0, 0.4);
 }
 
 /* Interior Slot Opening */
@@ -306,9 +289,8 @@ a {
     top: 50%;
     transform: translateY(-50%);
     width: 170px;
-    height: 3px;
+    height: 2px;
     background: #000000;
-    box-shadow: inset 0 1px 2px #000;
 }
 
 /* Floppy Eject Mechanism */
@@ -319,24 +301,20 @@ a {
     right: 8px;
     transform: translateY(-50%);
     width: 32px;
-    height: 10px;
-    background: linear-gradient(180deg, #444444 0%, #1f1f1f 100%);
-    border: 1px solid #0a0a0a;
+    height: 8px;
+    background: #3a3a3a;
     border-radius: 1px;
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        0 1px 2px rgba(0, 0, 0, 0.5);
 }
 .mac-stand-neck {
     width: 100px;
     height: 70px;
-    background: linear-gradient(#e6e0cd, #cfc9b2);
+    background: #d9d0b6;
 }
 
 .mac-stand-base {
     width: 320px;
     height: 18px;
-    background: linear-gradient(180deg, #d9d3bd, #c8c2a9);
+    background: #cabf9e;
     border-radius: 6px;
     margin-top: -2px;
 }

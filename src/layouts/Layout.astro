@@ -26,6 +26,8 @@ const currentApp = appByUrl(Astro.url.pathname);
       <!-- transition:persist keeps the desktop on screen while navigating -->
       <div class="mac-frame" transition:persist="desktop">
         <div class="mac-bezel">
+          <div class="mac-bezel-top" aria-hidden="true"></div>
+          <div class="mac-bezel-side" aria-hidden="true"></div>
           <div class="mac-screen-ring">
             <Desktop />
             <div id="dock" class="dock"></div>
