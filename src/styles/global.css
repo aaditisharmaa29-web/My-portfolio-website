@@ -733,7 +733,11 @@ a {
 }
 
 .window.maximised {
-    top: 28px left:0 width:100% height:calc(100% - 28px) border-radius:0;
+    top: 28px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 28px);
+    border-radius: 0;
 }
 
 .window.dragging {
