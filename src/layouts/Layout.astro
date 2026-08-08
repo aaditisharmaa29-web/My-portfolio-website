@@ -29,22 +29,23 @@ const currentApp = appByUrl(Astro.url.pathname);
       <div class="scene">
         <div class="mac-container">
           <div class="mac-frame" transition:persist="desktop">
-            <!-- one rigid group: everything inside moves together, nothing can misalign -->
             <div class="mac-case">
               <div class="mac-bezel">
                 <div class="mac-bezel-top" aria-hidden="true"></div>
                 <div class="mac-bezel-side" aria-hidden="true"></div>
+
+                <!-- screen ring lives INSIDE the bezel so the plastic wraps around it -->
+                <div class="mac-screen-ring">
+                  <Desktop />
+                  <div id="dock" class="dock"></div>
+                </div>
               </div>
+
+              <!-- chin sits below the bezel, still part of the rigid mac-case group -->
               <div class="mac-chin">
                 <div class="mac-logo" aria-hidden="true"></div>
                 <div class="mac-disk-slot" aria-hidden="true"></div>
               </div>
-            </div>
-
-            <!-- screen: a sibling of .mac-case, so the drift never touches it -->
-            <div class="mac-screen-ring mac-screen-sticky">
-              <Desktop />
-              <div id="dock" class="dock"></div>
             </div>
 
             <div class="mac-stand-neck"></div>

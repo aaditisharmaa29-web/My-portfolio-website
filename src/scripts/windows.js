@@ -354,5 +354,48 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
+// ─── Mouse-parallax tilt for .mac-case ──────────────────────────────────────
+// Moves the mac casing subtly with the cursor so it feels alive without the
+// constant looping drift animation that was previously in CSS.
+(function initParallax() {
+  // Bail out if the user prefers reduced motion.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  // Max displacement in each axis (px). Keep it gentle.
+  const MAX_X = 6;
+  const MAX_Y = 4;
+
+  let rafId = null;
+  let targetX = 0;
+  let targetY = 0;
+
+  function applyTilt() {
+    const el = document.querySelector(".mac-case");
+    if (el) {
+      el.style.transform = `translate(${targetX}px, ${targetY}px)`;
+    }
+    rafId = null;
+  }
+
+  document.addEventListener("mousemove", (e) => {
+    // Normalise cursor to [-1, 1] relative to the viewport centre.
+    const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+
+    targetX = nx * MAX_X;
+    targetY = ny * MAX_Y;
+
+    // Throttle DOM writes to the next animation frame.
+    if (!rafId) rafId = requestAnimationFrame(applyTilt);
+  });
+
+  // Spring back to neutral when the cursor leaves the window.
+  document.addEventListener("mouseleave", () => {
+    targetX = 0;
+    targetY = 0;
+    if (!rafId) rafId = requestAnimationFrame(applyTilt);
+  });
+})();
+
 // astro:page-load fires on the first load and after every navigation.
 document.addEventListener("astro:page-load", showWindows);

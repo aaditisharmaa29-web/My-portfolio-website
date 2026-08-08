@@ -73,7 +73,8 @@ a {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow: hidden;
+    /* overflow must stay visible so windows can be dragged outside the mac frame */
+    overflow: visible;
 }
 
 /* ============================================================
@@ -123,7 +124,8 @@ text-underline-offset: 4px;
 .mac-container {
     position: absolute;
     left: 50%;
-    bottom: -5%;
+    /* anchor from the top so the mac sits lower and never covers the navbar */
+    top: 8%;
     transform: translateX(-50%);
 }
 
@@ -149,31 +151,24 @@ text-underline-offset: 4px;
     width: 100%;
     background: #e7dfca;
     border-radius: 18px;
-    padding: 34px 34px 22px;
+    /* plastic surround: top/sides wide, bottom thinner (chin takes over below) */
+    padding: 28px 28px 20px;
     box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 /* one rigid group: front/top/side panels + chin, moved as a single
-   unit — a plain translateX can never desync them, so it can't break */
+   unit — mouse-parallax is applied here via JS (windows.js) */
 .mac-case {
     position: relative;
     width: 100%;
-    animation: mac-drift 6s ease-in-out infinite;
-}
-
-@keyframes mac-drift {
-    0%, 100% { transform: translateX(-8px); }
-    50%      { transform: translateX(8px); }
+    /* smooth follow on mouse move; JS drives the transform */
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @media (prefers-reduced-motion: reduce) {
     .mac-case {
-        animation: none;
+        transition: none;
     }
-}
-
-.mac-screen-sticky {
-    width: 100%;
 }
 /* top panel: lightest tone, sheared with skewX so it reads as the
    top of the case tilting back */
@@ -205,11 +200,16 @@ text-underline-offset: 4px;
 
 .mac-screen-ring {
     position: relative;
+    width: 100%;
     background: #141414;
-    border-radius: 14px;
-    padding: 18px;
+    border-radius: 10px;
+    /* inner padding = the dark inset margin between the plastic and the screen glass */
+    padding: 14px 14px 10px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    /* allow windows to overflow the screen bezel when dragged */
+    overflow: visible;
 }
 
 /* ============================================================
@@ -222,7 +222,8 @@ text-underline-offset: 4px;
     height: 760px;
     max-height: 72vh;
     border-radius: 4px;
-    overflow: hidden;
+    /* overflow must be visible so windows can be dragged out of the screen area */
+    overflow: visible;
     background: #b8d4e8;
 }
 
@@ -231,7 +232,7 @@ text-underline-offset: 4px;
     width: 100%;
     height: 100%;
     background: transparent;
-    overflow: hidden;
+    overflow: visible;
 }
 
 /* ============================================================
@@ -426,18 +427,21 @@ text-underline-offset: 4px;
 ============================================================ */
 
 .window {
-position: absolute;
-top: 50px;
-left: 110px; /* clears the desktop-icon column (15px–85px) */
-width: 520px;
-height: 360px;
-display: flex;
-flex-direction: column;
-background: #ffffff;
-border-radius: 0;
-border: 2px solid #000000;
-box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
-overflow: hidden;
+    position: absolute;
+    top: 50px;
+    left: 110px; /* clears the desktop-icon column (15px–85px) */
+    width: 520px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 0;
+    border: 2px solid #000000;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    pointer-events: auto;  /* windows must capture clicks */
+    user-select: none;     /* prevent text selection while dragging */
+    z-index: 100;
 }
 
 
