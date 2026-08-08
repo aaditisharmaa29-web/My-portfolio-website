@@ -1,7 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Window from "../../components/Window.astro";
-import ProjectsWindow from "../../components/ProjectsWindow.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -17,8 +15,4 @@ const { project } = Astro.params;
 const { projectId } = Astro.props;
 ---
 
-<Layout title={project ? `Project - ${project}` : "Projects"}>
-  <Window title="Projects" variant="static">
-    <ProjectsWindow activeProjectId={projectId} />
-  </Window>
-</Layout>
+<Layout title={project ? `Project - ${project}` : "Projects"} activeProjectId={projectId} />

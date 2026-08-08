@@ -1,126 +1,70 @@
 ---
 import "../styles/global.css";
-import Navbar from "../components/Navbar.astro";
+import { ClientRouter } from "astro:transitions";
+import { appByUrl } from "../data/apps";
+import Desktop from "../components/Desktop.astro";
+import WindowShell from "../components/WindowShell.astro";
+import ResumeContent from "../components/content/ResumeContent.astro";
+import FunContent from "../components/content/FunContent.astro";
+import ContactContent from "../components/content/ContactContent.astro";
 import ProjectsWindow from "../components/ProjectsWindow.astro";
 
-const { title = "Aditi's Portfolio" } = Astro.props;
+const { title = "Aditi's Portfolio", activeProjectId } = Astro.props;
+
+const currentApp = appByUrl(Astro.url.pathname);
 ---
 
-<html lang="en">
-<head>
+<html lang="en" transition:animate="none">
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-</head>
-<body>
+    <ClientRouter />
+  </head>
+  <body data-current-app={currentApp}>
     <main class="homepage">
-
-        <Navbar />
-
-        <button id="back-button" class="back-button" aria-label="Back">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
-            </svg>
-        </button>
-
-        <div class="mac-frame">
-            <div class="mac-bezel">
-                <div class="mac-screen-ring">
-                    <slot />
-                    <div id="dock" class="dock"></div>
-                </div>
-            </div>
-            <div class="mac-chin">
-                <div class="mac-logo" aria-hidden="true"></div>
-                <div class="mac-disk-slot" aria-hidden="true"></div>
-            </div>
-            <div class="mac-stand-neck"></div>
-            <div class="mac-stand-base"></div>
+      <!-- transition:persist keeps the desktop on screen while navigating -->
+      <div class="mac-frame" transition:persist="desktop">
+        <div class="mac-bezel">
+          <div class="mac-screen-ring">
+            <Desktop />
+            <div id="dock" class="dock"></div>
+          </div>
         </div>
+        <div class="mac-chin">
+          <div class="mac-logo" aria-hidden="true"></div>
+          <div class="mac-disk-slot" aria-hidden="true"></div>
+        </div>
+        <div class="mac-stand-neck"></div>
+        <div class="mac-stand-base"></div>
+      </div>
     </main>
 
-    <!-- WINDOW TEMPLATE (Cloned by desktop.js when buttons are clicked) -->
-    <template id="window-template">
-        <div class="window">
-            <div class="window-header">
-                <div class="traffic-lights">
-                    <button class="window-close" title="Close">×</button>
-                    <button class="window-minimise" title="Minimize">–</button>
-                    <button class="window-maximise" title="Full Screen">□</button>
-                </div>
-                <span class="window-title">Window</span>
-            </div>
-            <div class="window-content"></div>
-            <div class="resize-handle"></div>
-        </div>
+    <!-- One hidden window per app. windows.js copies these onto the desktop. -->
+    <template data-app="resume">
+      <WindowShell app="resume" title="Resume">
+        <ResumeContent />
+      </WindowShell>
     </template>
 
-    <script src="../scripts/desktop.js"></script>
-    <script src="../scripts/window-control.js"></script>
+    <template data-app="projects">
+      <WindowShell app="projects" title="Projects">
+        <ProjectsWindow activeProjectId={activeProjectId} />
+      </WindowShell>
+    </template>
 
-    <!-- APP CONTENT TEMPLATES (hidden; cloned by desktop.js into windows) -->
-    <div id="resume-template" style="display:none">
-      <section class="resume-window">
-        <header class="resume-header">
-          <h1>Aditi Sharma</h1>
-          <p>Graphic Designer &bull; Illustrator &bull; UI/UX Designer</p>
-        </header>
-        <section class="resume-section">
-          <h2>About Me</h2>
-          <p>Hi! I'm Aditi. I love creating playful digital experiences, editorial illustrations and immersive web experiences inspired by Indian visual culture.</p>
-        </section>
-        <section class="resume-section">
-          <h2>Skills</h2>
-          <ul>
-            <li>UI / UX Design</li>
-            <li>Brand Identity</li>
-            <li>Illustration</li>
-            <li>Editorial Design</li>
-            <li>Motion Graphics</li>
-          </ul>
-        </section>
-        <section class="resume-section">
-          <h2>Software</h2>
-          <ul>
-            <li>Figma</li>
-            <li>Illustrator</li>
-            <li>Photoshop</li>
-            <li>After Effects</li>
-            <li>InDesign</li>
-          </ul>
-        </section>
-      </section>
-    </div>
+    <template data-app="fun">
+      <WindowShell app="fun" title="Fun">
+        <FunContent />
+      </WindowShell>
+    </template>
 
-    <div id="projects-template" style="display:none">
-      <ProjectsWindow />
-    </div>
+    <template data-app="contact">
+      <WindowShell app="contact" title="Contact">
+        <ContactContent />
+      </WindowShell>
+    </template>
 
-    <div id="fun-template" style="display:none">
-      <section class="fun-window">
-        <h1>Fun</h1>
-        <p>Things I enjoy outside design.</p>
-        <ul>
-          <li>Cycling</li>
-          <li>Sketching</li>
-          <li>Collecting postcards</li>
-          <li>Travelling</li>
-          <li>Coffee</li>
-        </ul>
-      </section>
-    </div>
-
-    <div id="contact-template" style="display:none">
-      <section class="contact-window">
-        <h1>Contact</h1>
-        <p>Let's build something together.</p>
-        <form>
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <textarea placeholder="Message"></textarea>
-          <button type="submit">Send</button>
-        </form>
-      </section>
-    </div>
-</body>
+    <script src="../scripts/windows.js"></script>
+  </body>
 </html>
