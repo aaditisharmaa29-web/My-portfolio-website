@@ -152,6 +152,28 @@ a {
     box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+/* one rigid group: front/top/side panels + chin, moved as a single
+   unit — a plain translateX can never desync them, so it can't break */
+.mac-case {
+    position: relative;
+    width: 100%;
+    animation: mac-drift 6s ease-in-out infinite;
+}
+
+@keyframes mac-drift {
+    0%, 100% { transform: translateX(-8px); }
+    50%      { transform: translateX(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mac-case {
+        animation: none;
+    }
+}
+
+.mac-screen-sticky {
+    width: 100%;
+}
 /* top panel: lightest tone, sheared with skewX so it reads as the
    top of the case tilting back */
 .mac-bezel-top {
