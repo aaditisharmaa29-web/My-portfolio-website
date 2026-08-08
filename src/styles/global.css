@@ -138,13 +138,18 @@ a {
 
 .mac-bezel {
     width: 100%;
-    background: linear-gradient(180deg, #f2ede0 0%, #e6e0cd 100%);
-    border-radius: 64px 64px 20px 20px;
+    background-color: #ebe4d3;
+    background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 0),
+        linear-gradient(180deg, #f5f0e1 0%, #dfd6c0 100%);
+    background-size: 3px 3px, 100% 100%;
+    border-radius: 40px 40px 20px 20px;
     padding: 34px 34px 22px;
     box-shadow:
-        0 18px 40px rgba(0, 0, 0, .18),
-        0 6px 12px rgba(0, 0, 0, .08),
-        inset 0 1px 0 rgba(255, 255, 255, .5);
+        0 25px 50px -10px rgba(0, 0, 0, 0.4),
+        0 10px 20px -5px rgba(0, 0, 0, 0.2),
+        inset 0 2px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.15);
 }
 
 .mac-screen-ring {
@@ -171,6 +176,35 @@ a {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* ADD THIS RIGHT BELOW .mac-screen: */
+.mac-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 40%),
+        inset 0 3px 12px rgba(0, 0, 0, 0.85);
+}
+
+.mac-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 51;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    opacity: 0.5;
 }
 
 .desktop {
@@ -225,16 +259,7 @@ a {
     letter-spacing: .02em;
 }
 
-.mac-chin {
-    width: 100%;
-    height: 120px;
-    background: linear-gradient(180deg, #e6e0cd 0%, #d9d3bd 100%);
-    border-radius: 0 0 34px 34px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 44px;
-}
+
 
 .mac-logo {
     width: 26px;
@@ -244,26 +269,65 @@ a {
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08);
 }
 
-.mac-disk-slot {
-    position: relative;
-    width: 220px;
-    height: 14px;
-    background: #232323;
-    border-radius: 3px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6);
+.mac-chin {
+    width: 100%;
+    height: 100px;
+    background-color: #e2dac7;
+    background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0),
+        linear-gradient(180deg, #dfd6c0 0%, #cec5ae 100%);
+    background-size: 3px 3px, 100% 100%;
+    border-radius: 0 0 24px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 44px;
+    border-top: 2px solid #b8af97;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
+.mac-disk-slot {
+    position: relative;
+    width: 230px;
+    height: 14px;
+    background: #0d0d0d;
+    border-radius: 2px;
+    box-shadow: 
+        inset 0 4px 8px rgba(0, 0, 0, 0.95),
+        inset 0 -1px 2px rgba(255, 255, 255, 0.2),
+        0 1px 0 rgba(255, 255, 255, 0.7),
+        0 -1px 1px rgba(0, 0, 0, 0.4);
+}
+
+/* Interior Slot Opening */
+.mac-disk-slot::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 170px;
+    height: 3px;
+    background: #000000;
+    box-shadow: inset 0 1px 2px #000;
+}
+
+/* Floppy Eject Mechanism */
 .mac-disk-slot::after {
     content: "";
     position: absolute;
-    top: -4px;
-    right: 6px;
-    width: 36px;
-    height: 22px;
-    background: linear-gradient(180deg, #3a3a3a, #262626);
-    border-radius: 3px;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 10px;
+    background: linear-gradient(180deg, #444444 0%, #1f1f1f 100%);
+    border: 1px solid #0a0a0a;
+    border-radius: 1px;
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 1px 2px rgba(0, 0, 0, 0.5);
 }
-
 .mac-stand-neck {
     width: 100px;
     height: 70px;
@@ -701,3 +765,70 @@ a {
         height: 75%;
     }
 }
+
+/* ============================================================
+   RETRO MAC KEYBOARD
+============================================================ */
+
+.mac-keyboard {
+    position: relative;
+    width: 680px;
+    max-width: 85vw;
+    margin: 12px auto 0;
+    padding: 12px 16px 16px;
+    background-color: #ebe4d3;
+    background-image: 
+        radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0),
+        linear-gradient(180deg, #f5f0e1 0%, #d8cfb9 100%);
+    background-size: 3px 3px, 100% 100%;
+    border-radius: 6px 6px 12px 12px;
+    box-shadow: 
+        0 15px 25px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transform: perspective(500px) rotateX(12deg); /* Gives a 3D desk tilt */
+    transform-origin: top center;
+}
+
+.keyboard-keys {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #c2b9a3;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.key-row {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    min-width: 28px;
+    padding: 0 6px;
+    font-family: "Geneva", "Instrument Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: #3d383c;
+    background: linear-gradient(180deg, #ffffff 0%, #e6dfcc 100%);
+    border-radius: 3px;
+    box-shadow: 
+        0 3px 0 #b3a992,
+        0 4px 3px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 #ffffff;
+    user-select: none;
+}
+
+.key-wide { min-width: 48px; }
+.key-extra-wide { min-width: 60px; }
+.key-space { flex: 1; max-width: 240px; }
