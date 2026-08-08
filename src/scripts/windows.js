@@ -45,7 +45,7 @@ function initDrag(win) {
 
   const instance = new Draggable(win, {
     handle: ".window-header",
-    cancel: ".traffic-lights",
+    cancel: ".window-close, .window-minimise, .window-maximise, .window-content, .resize-handle",
     bounds: "parent",
     disabled: win.classList.contains("maximised"),
     // Reuses the existing `.window.dragging { transition: none }` rule.

@@ -340,8 +340,8 @@ a {
 .window-layer {
     position: absolute;
     inset: 0;
-    overflow: hidden;
-    z-index: 20;
+    overflow: visible;
+    z-index: 30;
 }
 
 /* ============================================================
@@ -363,7 +363,7 @@ a {
     gap: 20px;
     /* Spacing between folders */
     z-index: 10;
-    /* Ensures icons stay clickable */
+    /* Windows (z-index 30) always appear above these icons */
 }
 
 .desktop-icon {
