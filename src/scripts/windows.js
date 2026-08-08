@@ -8,8 +8,29 @@ import { APPS } from "../data/apps";
 
 const KEY = "desktop:windows";
 
+// Menu bar is 28px tall; keep a little breathing room below it so a
+// window's header/title is never clipped by the screen's overflow:hidden.
+const TOP_MARGIN = 36;
+
 function getApp(id) {
   return APPS.find((item) => item.app === id);
+}
+
+function clampEntry(entry, layer) {
+  const w = Number.isFinite(entry.w) ? entry.w : 520;
+  const h = Number.isFinite(entry.h) ? entry.h : 360;
+  const screenW = layer.clientWidth || 900;
+  const screenH = layer.clientHeight || 760;
+
+  const maxX = Math.max(TOP_MARGIN, screenW - w);
+  const maxY = Math.max(TOP_MARGIN, screenH - h);
+
+  entry.w = w;
+  entry.h = h;
+  entry.x = Number.isFinite(entry.x) ? Math.min(Math.max(entry.x, 0), maxX) : 40;
+  entry.y = Number.isFinite(entry.y) ? Math.min(Math.max(entry.y, TOP_MARGIN), maxY) : TOP_MARGIN;
+
+  return entry;
 }
 
 function currentApp() {
@@ -19,7 +40,6 @@ function currentApp() {
 function loadStack() {
   try {
     const saved = JSON.parse(localStorage.getItem(KEY)) || [];
-    // ignore anything that is not a real app
     return saved.filter((entry) => entry && getApp(entry.app));
   } catch {
     return [];
@@ -30,11 +50,6 @@ function saveStack(stack) {
   localStorage.setItem(KEY, JSON.stringify(stack));
 }
 
-// Live @neodrag/vanilla instance per window element. neodrag's drag offset
-// is cumulative from the moment the instance is created, so we rebuild the
-// instance (fresh baseline, offset back to zero) every time a window's
-// left/top is set from outside a drag — new windows, restores, and right
-// after a drag ends.
 const draggables = new WeakMap();
 
 function initDrag(win) {
@@ -98,11 +113,10 @@ function showWindows() {
       entry.min = false;
       stack.push(entry);
     } else {
-      // not open yet, add it on top
       stack.push({
         app: current,
         x: 40 + stack.length * 24,
-        y: 30 + stack.length * 24,
+        y: TOP_MARGIN + stack.length * 24,
         w: 520,
         h: 360,
         min: false,
@@ -118,8 +132,8 @@ function showWindows() {
       win.remove();
     }
   }
-
-  stack.forEach((entry, index) => {
+stack.forEach((entry, index) => {
+    clampEntry(entry, layer);
     let win = layer.querySelector(`.window[data-app="${entry.app}"]`);
 
     if (!win) {

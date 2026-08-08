@@ -172,10 +172,9 @@ a {
     max-height: 72vh;
     border-radius: 4px;
     overflow: hidden;
-    background-image: url("/images/slot-bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #d9d3c4;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 0);
+    background-size: 4px 4px;
 }
 
 /* ADD THIS RIGHT BELOW .mac-screen: */
