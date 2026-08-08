@@ -22,7 +22,7 @@ body {
 
 body {
     font-family: "Geneva", "Chicago", "Instrument Sans", sans-serif;
-    background: #e3d6df;
+    background: #faf9f6;
     color: #3f3f3f;
 }
 
@@ -69,11 +69,6 @@ a {
     position: relative;
     width: min(100vw, 1600px);
     aspect-ratio: 1536/925;
-    background-image: url("/images/homepage-bg.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* overflow must stay visible so windows can be dragged outside the mac frame */
     overflow: visible;
 }
 

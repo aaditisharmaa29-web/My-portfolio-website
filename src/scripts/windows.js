@@ -315,10 +315,20 @@ document.addEventListener("mousedown", (event) => {
 document.addEventListener("mousemove", (event) => {
   if (!resizing) return;
   const win = resizing.win;
+
   const w = resizing.startW + event.clientX - resizing.startX;
   const h = resizing.startH + event.clientY - resizing.startY;
-  win.style.width = Math.max(320, w) + "px";
-  win.style.height = Math.max(220, h) + "px";
+
+  // Cap so the window's right/bottom edge never exits the screen (#window-layer).
+  const layer = document.getElementById("window-layer");
+  const layerRect = layer ? layer.getBoundingClientRect() : null;
+  const winLeft  = parseInt(win.style.left)  || 0;
+  const winTop   = parseInt(win.style.top)   || 0;
+  const maxW = layerRect ? layerRect.width  - winLeft : Infinity;
+  const maxH = layerRect ? layerRect.height - winTop  : Infinity;
+
+  win.style.width  = Math.min(Math.max(320, w), maxW) + "px";
+  win.style.height = Math.min(Math.max(220, h), maxH) + "px";
 });
 
 document.addEventListener("mouseup", () => {
